@@ -104,5 +104,7 @@ dist
 .tern-port
 
 # Sublime Text files
-.sublime-project
-.sublime-workspace
+*.sublime-project
+*.sublime-workspace
+
+.DS_Store
