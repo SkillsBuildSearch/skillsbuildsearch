@@ -2,6 +2,7 @@
   <div class="input-group mb-3">
     <input
       type="search"
+      class="form-control"
       placeholder="Input your course here..."
       aria-label="Course description"
       aria-describedby="search-button"
