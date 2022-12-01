@@ -26,7 +26,7 @@ import SearchResults from "./components/SearchResults.vue";
               v-model="categories[category[0]]"
               :id="category[0] + 'Input'"
             />
-            <label class="form-check-label" :for="category + 'Input'">
+            <label class="form-check-label" :for="category[0] + 'Input'">
               {{ category[0] }}
             </label>
           </div>
