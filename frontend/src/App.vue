@@ -13,7 +13,7 @@ import SearchResults from "./components/SearchResults.vue";
           <SearchBox @search="toggleShow" />
           <SearchResults v-if="showResults" />
         </div>
-        <div class="col-auto bg-ligh">
+        <div class="col-auto">
           <h2>Course categories</h2>
           <div
             v-for="category in Object.entries(categories)"
