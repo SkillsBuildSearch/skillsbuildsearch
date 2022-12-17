@@ -1,5 +1,5 @@
 {
-  "name": "skillsbuildsearch",
+  "name": "skillsbuildsearch-frontend",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
