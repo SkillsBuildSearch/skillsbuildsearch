@@ -14,3 +14,13 @@ Going to include Bootstrap CDN
 5. Open the URL it presents in your browser. The DOM will update automatically with any changes you make to the code, so there's no need to refresh manually.
 
 You can read more in the README.md file in the frontend folder.
+
+
+# Conventional Commits
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
