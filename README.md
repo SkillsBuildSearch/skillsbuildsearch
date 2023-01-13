@@ -17,3 +17,13 @@ You can read more in the README.md file in the frontend folder.
 
 ## Backend development version
 Uses create-express-api as a template. See readme file in folder for more information.
+
+
+## Conventional Commits
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
