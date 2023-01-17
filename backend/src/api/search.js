@@ -33,6 +33,9 @@ router.get('/', (req, res) => {
       },
     ]);
   }
+  else {
+    res.json([]);
+  }
 });
 
 module.exports = router;
