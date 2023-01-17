@@ -10,7 +10,7 @@ const api = require('./api');
 
 const app = express();
 
-app.use(express.static('./dist'))
+app.use(express.static('../frontend/src/dist'))
 
 app.use(morgan('dev'));
 app.use(helmet());
