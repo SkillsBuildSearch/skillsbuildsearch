@@ -10,8 +10,8 @@ import SearchResults from "./components/SearchResults.vue";
       <PageHeader />
       <div class="row">
         <div class="col">
-          <SearchBox @search="toggleShow" />
-          <SearchResults v-if="showResults" />
+          <SearchBox @search="loadResults" />
+          <SearchResults :results="results" />
         </div>
         <div class="col-auto">
           <h2>Course categories</h2>
@@ -53,15 +53,24 @@ export default {
         "Red Hat Academy": false,
         "IBM Quantum": false,
       },
+      results: [],
     };
   },
   methods: {
-    toggleShow(result) {
-      if (result) {
-        this.showResults = true;
-      } else {
-        this.showResults = false;
-      }
+    loadResults(text) {
+      const searchRequest = new Request(
+        `http://localhost:5001/api/v1/search?text=${text}`
+      );
+
+      fetch(searchRequest).then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        response.json().then((data) => {
+          this.results = data;
+        });
+      });
     },
   },
 };
