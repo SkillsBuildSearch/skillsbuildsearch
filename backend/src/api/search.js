@@ -14,11 +14,15 @@ function parseLength(query) {
 }
 
 function getEmbeddings(cats) {
-  embeddings = data.categories.map((cat) => ({label: cat, score: 0}));
-  for (let cat in cats) {
-    labels = cat.label.trim("/").split("/")
-    for (let label in labels) {
-      embeddings[label] = max(embeddings[label], cat.score);
+  embeddings = {};
+  for (let cat of data.categories) {
+    embeddings[cat] = 0.0;
+  }
+
+  for (let cat of cats) {
+    labels = cat.label.slice(1).split("/")
+    for (let label of labels) {
+      embeddings[label] = Math.max(embeddings[label], cat.score);
     }
   }
   return embeddings;
@@ -26,12 +30,13 @@ function getEmbeddings(cats) {
 
 function MSE(user, course) {
   cat_emb = getEmbeddings(user);
-  course_emb = getEmbeddings(course);
+  course_emb = getEmbeddings(course.categories);
 
   let acc = 0;
-  for (let cat in data.categories) {
+  for (let cat of data.categories) {
     acc += Math.pow(cat_emb[cat]-course_emb[cat], 2);
   }
+  //console.log(acc, course);
   return acc / data.categories.length;
 }
 

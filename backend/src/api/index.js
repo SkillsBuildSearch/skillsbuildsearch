@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
   });
 });
 
-router.use('/emojis', emojis);
 router.use('/search', search);
 
 module.exports = router;
