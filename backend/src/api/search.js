@@ -13,20 +13,33 @@ function parseLength(query) {
   return !x ? DEFAULT_LENGTH : x;
 }
 
-function MSE(categories, course) {
-  const labelmap = {};
-  categories.forEach((obj) => {
-    labelmap[obj.label] = obj.score;
-  });
-
-  let acc = 0;
-  for(let i=0; i<course.categories.length; i++) {
-    const label = course.categories[i].label;
-    if(label in labelmap) {
-      acc += Math.pow(course.categories[i].score-labelmap[label], 2);
+function getEmbeddings(cats) {
+  embeddings = data.categories.map((cat) => ({label: cat, score: 0}));
+  for (let cat in cats) {
+    labels = cat.label.trim("/").split("/")
+    for (let label in labels) {
+      embeddings[label] = max(embeddings[label], cat.score);
     }
   }
-  return acc;
+  return embeddings;
+}
+
+function MSE(user, course) {
+  cat_emb = getEmbeddings(user);
+  course_emb = getEmbeddings(course);
+
+  let acc = 0;
+  for (let cat in data.categories) {
+    acc += Math.pow(cat_emb[cat]-course_emb[cat], 2);
+  }
+  return acc / data.categories.length;
+}
+
+function embeddingSort(userEmbeddings) {
+  return data.dataset
+    .map((course) => ({mse: MSE(userEmbeddings, course), course}))
+    .sort((a, b) => a.mse-b.mse)
+    .map((mseCourse) => mseCourse.course.input);
 }
 
 const nlu = new NLU({
@@ -37,7 +50,7 @@ const nlu = new NLU({
   serviceUrl: process.env.API_URL,
 });
 
-const dataset = JSON.parse(fs.readFileSync('dataset.json', 'utf8'));
+const data = JSON.parse(fs.readFileSync('data_with_classes.json', 'utf8'));
 
 const express = require('express');
 const router = express.Router();
@@ -53,17 +66,17 @@ router.get('/', async (req, res) => {
     text: req.query.text,
     features: {
       categories: {
-        limit: 5,
+        limit: 20,
       }
-    }});
-
-  let cmpList = dataset
-    .map((course) => ({mse: MSE(result.result.categories, course), course}))
-    .sort((a, b) => a.mse-b.mse)
-    .map((mseCourse) => mseCourse.course.input);
+    }
+  });
+  if (result.error) {
+    res.json([]);
+    return;
+  }
 
   let length = parseLength(req.query.length);
-  let searchResults = cmpList.slice(0, length);
+  let searchResults = embeddingSort(result.result.categories).slice(0, length);
   res.json(searchResults);
   return;
 });
