@@ -1,6 +1,6 @@
 const express = require('express');
 
-const search = require('./search');
+const search = require('./search').router;
 
 const router = express.Router();
 

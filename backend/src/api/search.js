@@ -86,4 +86,8 @@ router.get('/', async (req, res) => {
   return;
 });
 
-module.exports = router;
+module.exports = {
+  router,
+  MSE,
+  parseLength
+}
