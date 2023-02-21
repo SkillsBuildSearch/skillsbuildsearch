@@ -38,6 +38,11 @@ import SearchResults from "./components/SearchResults.vue";
 
 <script>
 export default {
+  components: {
+    PageHeader,
+    SearchBox,
+    SearchResults,
+  },
   data() {
     return {
       showResults: false,
