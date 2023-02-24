@@ -5,15 +5,15 @@ const { IamAuthenticator } = require("ibm-watson/auth");
 require("dotenv").config();
 
 function processCheckboxes(query) {
-  
+  return true;
 }
 
 /**
  * Checks whether a course is allowed by the checkboxes specified by the user
  * @function  checkboxAllowed
- * @param     {*}       course      
- * @param     {*}       checkboxes
- * @returns   {boolean}
+ * @param     {*}       course      a course from the dataset, including the 'Topic' attribute
+ * @param     {*}       checkboxes  an object detailing which checkboxes were selected
+ * @returns   {boolean}             does the course Topics match with the checkboxes
  */
 function checkboxAllowed(course, checkboxes) {
   if (checkboxes.all)
