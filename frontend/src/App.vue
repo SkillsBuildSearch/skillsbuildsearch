@@ -2,6 +2,7 @@
 import PageHeader from "./components/PageHeader.vue";
 import SearchBox from "./components/SearchBox.vue";
 import SearchResults from "./components/SearchResults.vue";
+import SignUpBox from "./components/SignUpBox.vue";
 </script>
 
 <template>
@@ -32,6 +33,7 @@ import SearchResults from "./components/SearchResults.vue";
           </div>
         </div>
       </div>
+      <SignUpBox></SignUpBox>
     </div>
   </main>
 </template>
@@ -42,6 +44,7 @@ export default {
     PageHeader,
     SearchBox,
     SearchResults,
+    SignUpBox,
   },
   data() {
     return {
