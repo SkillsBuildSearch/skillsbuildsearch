@@ -63,9 +63,22 @@ export default {
   },
   methods: {
     loadResults(text) {
-      const searchRequest = new Request(
-        `http://localhost:5001/api/v1/search?text=${text}`
-      );
+      let uri = `http://localhost:5001/api/v1/search?text=${encodeURIComponent(
+        text
+      )}`;
+      let hasCategories = false;
+
+      for (const [key, value] of Object.entries(this.categories)) {
+        if (value) {
+          if (!hasCategories) {
+            uri += "&categories=";
+          }
+          hasCategories = true;
+          uri += encodeURIComponent(key + ",");
+        }
+      }
+
+      const searchRequest = new Request(uri);
 
       fetch(searchRequest).then((response) => {
         if (!response.ok) {
