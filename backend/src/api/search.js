@@ -1,8 +1,8 @@
-const fs = require("fs");
-const NLU = require("ibm-watson/natural-language-understanding/v1");
-const { IamAuthenticator } = require("ibm-watson/auth");
+const fs = require('fs');
+const NLU = require('ibm-watson/natural-language-understanding/v1');
+const { IamAuthenticator } = require('ibm-watson/auth');
 
-require("dotenv").config();
+require('dotenv').config();
 
 function processCheckboxes(query) {
   return true;
@@ -16,13 +16,12 @@ function processCheckboxes(query) {
  * @returns   {boolean}             does the course Topics match with the checkboxes
  */
 function checkboxAllowed(course, checkboxes) {
-  if (checkboxes.all)
-    return true;
+  if (checkboxes.all) return true;
 
   return course.input.Topic
-    .split(",")
-    .map(topic => topic.trim())
-    .filter(topic => checkboxes[topic])
+    .split(',')
+    .map((topic) => topic.trim())
+    .filter((topic) => checkboxes[topic])
     .length() > 0;
 }
 
@@ -35,14 +34,14 @@ function checkboxAllowed(course, checkboxes) {
 function getEmbeddings(cats) {
   // first create an empty embedding object
   embeddings = {};
-  for (let cat of data.categories) {
+  for (const cat of data.categories) {
     embeddings[cat] = 0.0;
   }
 
   // then populate embedding object with max scores from the IBM watson categories
-  for (let cat of cats) {
-    labels = cat.label.slice(1).split("/")
-    for (let label of labels) {
+  for (const cat of cats) {
+    labels = cat.label.slice(1).split('/');
+    for (const label of labels) {
       embeddings[label] = Math.max(embeddings[label], cat.score);
     }
   }
@@ -61,10 +60,10 @@ function MSE(userCats, course) {
   courseEmb = getEmbeddings(course);
 
   // MSE(𝚨, 𝚩) = 1/n * 𝛴 (𝚨_i - 𝚩_i)²
-  //let acc = data.categories.map((cat) => Math.pow(userCatsEmb[cat]-courseEmb[cat], 2)).reduce((x, y) => x+y, 0);
+  // let acc = data.categories.map((cat) => Math.pow(userCatsEmb[cat]-courseEmb[cat], 2)).reduce((x, y) => x+y, 0);
   let acc = 0;
-  for (let cat of data.categories) {
-    acc += Math.pow(userCatsEmb[cat]-courseEmb[cat], 2);
+  for (const cat of data.categories) {
+    acc += (userCatsEmb[cat] - courseEmb[cat]) ** 2;
   }
   return acc / data.categories.length;
 }
@@ -77,13 +76,13 @@ function MSE(userCats, course) {
  */
 function embeddingSort(userCats, checkboxes) {
   return data.dataset
-    .filter(course => checkboxAllowed(course, checkboxes))
-    .map(course => ({
-      mse: MSE(userCats, course.categories),  // computing MSE value for each course
-      course: course.input
+    .filter((course) => checkboxAllowed(course, checkboxes))
+    .map((course) => ({
+      mse: MSE(userCats, course.categories), // computing MSE value for each course
+      course: course.input,
     }))
-    .sort((a, b) => a.mse-b.mse)
-    .map(mseCourse => mseCourse.course);    // only return the course descriptions
+    .sort((a, b) => a.mse - b.mse)
+    .map((mseCourse) => mseCourse.course); // only return the course descriptions
 }
 
 /**
@@ -93,10 +92,9 @@ function embeddingSort(userCats, checkboxes) {
  * @returns {number}      the parsed and sanitised argument, or a default value
  */
 function parseLength(query) {
-  if (!query)
-    return process.env.DEFAULT_LENGTH;
+  if (!query) return process.env.DEFAULT_LENGTH;
 
-  let length = parseInt(query);
+  const length = parseInt(query);
   return (!length || length < 0) ? process.env.DEFAULT_LENGTH : length;
 }
 
@@ -113,11 +111,12 @@ const nlu = new NLU({
 const data = JSON.parse(fs.readFileSync('data_with_classes.json', 'utf8'));
 
 const express = require('express');
+
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   if (!req.query.text) {
-    res.json({error: "No text provided!", code: 1});
+    res.json({ error: 'No text provided!', code: 1 });
     return;
   }
 
@@ -127,18 +126,17 @@ router.get('/', async (req, res) => {
     features: {
       categories: {
         limit: 20,
-      }
-    }
+      },
+    },
   }).then((result) => {
     if (result.error) {
-      res.json({error: "An error occurred!", code: 2});
+      res.json({ error: 'An error occurred!', code: 2 });
       return;
     }
-  
-    let length = parseLength(req.query.length);
-    let searchResults = embeddingSort(result.result.categories).slice(0, length);
-    res.json(searchResults);
 
+    const length = parseLength(req.query.length);
+    const searchResults = embeddingSort(result.result.categories).slice(0, length);
+    res.json(searchResults);
   }).catch((err) => {
     // {"error":"not enough text for language id","code":422}
     // let error = JSON.parse(error.body);
@@ -151,5 +149,5 @@ module.exports = {
   MSE,
   parseLength,
   getEmbeddings,
-  embeddingSort
-}
+  embeddingSort,
+};
