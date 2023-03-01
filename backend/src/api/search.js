@@ -89,5 +89,7 @@ router.get('/', async (req, res) => {
 module.exports = {
   router,
   MSE,
-  parseLength
+  parseLength,
+  getEmbeddings,
+  embeddingSort
 }
