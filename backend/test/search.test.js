@@ -3,8 +3,8 @@ let imports = require('../src/api/search')
 let jsonTests = require('./TestCases/tests.json')
 
 describe('ParseLength', () => {
-    test('["3"] should result in [3]', () => {
-        expect(imports.parseLength("3")).toBe(3)
+  test('["3"] should result in [3]', () => {
+    expect(imports.parseLength("3")).toBe(3)
     });
     test('[""] should result in [5]', () => {
         expect(imports.parseLength("")).toBe(5)

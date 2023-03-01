@@ -47,25 +47,35 @@ export default {
     return {
       showResults: false,
       categories: {
-        "Artificial Intelligence": false,
-        Capstone: false,
-        "Data Science": false,
-        "IBM Automation": false,
-        "IBM Cloud": false,
-        "IBM Engineering": false,
-        "IBM Security": false,
-        "IBM Z": false,
-        "Red Hat Academy": false,
-        "IBM Quantum": false,
+        "Artificial Intelligence": true,
+        Capstone: true,
+        "Data Science": true,
+        "IBM Automation": true,
+        "IBM Cloud": true,
+        "IBM Engineering": true,
+        "IBM Security": true,
+        "IBM Z": true,
+        "Red Hat Academy": true,
+        "IBM Quantum": true,
       },
       results: [],
     };
   },
   methods: {
     loadResults(text) {
-      const searchRequest = new Request(
-        `http://localhost:5001/api/v1/search?text=${text}`
-      );
+      let uri = `http://localhost:5001/api/v1/search?text=${encodeURIComponent(
+        text
+      )}`;
+      
+      let catEncoding = 0;
+      Object.entries(this.categories).forEach((value, idx) => {
+        /* eslint-disable-next-line no-bitwise */
+        catEncoding |= value[1] << idx;
+      });
+
+      uri += `&checkboxes=${encodeURIComponent(catEncoding)}`;
+
+      const searchRequest = new Request(uri);
 
       fetch(searchRequest).then((response) => {
         if (!response.ok) {
@@ -74,6 +84,23 @@ export default {
 
         response.json().then((data) => {
           this.results = data;
+        });
+      });
+    },
+    loadCategories() {
+      const searchRequest = new Request(
+        "http://localhost:5001/api/v1/categories/"
+      );
+
+      fetch(searchRequest).then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        response.json().then((data) => {
+          for (const value of data) {
+            this.categories[value] = true;
+          }
         });
       });
     },

@@ -6,7 +6,7 @@
       placeholder="Input your course here..."
       aria-label="Course description"
       aria-describedby="search-button"
-      @keyup.enter="submit"
+      @keyup.enter.prevent="submit"
       v-model="searchText"
     />
     <button
