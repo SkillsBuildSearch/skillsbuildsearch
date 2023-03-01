@@ -66,17 +66,14 @@ export default {
       let uri = `http://localhost:5001/api/v1/search?text=${encodeURIComponent(
         text
       )}`;
-      let hasCategories = false;
+      
+      let catEncoding = 0;
+      Object.entries(this.categories).forEach((value, idx) => {
+        /* eslint-disable-next-line no-bitwise */
+        catEncoding |= value[1] << idx;
+      });
 
-      for (const [key, value] of Object.entries(this.categories)) {
-        if (value) {
-          if (!hasCategories) {
-            uri += "&categories=";
-          }
-          hasCategories = true;
-          uri += encodeURIComponent(key + ",");
-        }
-      }
+      uri += `&checkboxes=${encodeURIComponent(catEncoding)}`;
 
       const searchRequest = new Request(uri);
 
