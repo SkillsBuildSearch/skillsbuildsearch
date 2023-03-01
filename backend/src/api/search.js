@@ -4,8 +4,48 @@ const { IamAuthenticator } = require('ibm-watson/auth');
 
 require('dotenv').config();
 
-function processCheckboxes(query) {
-  return true;
+// loading the dataset & additional data from disk
+const dataset = JSON.parse(fs.readFileSync('dataset.json', 'utf8'));
+const categories = JSON.parse(fs.readFileSync('embeddings_categories.json', 'utf8'));
+const checkbox_cats = JSON.parse(fs.readFileSync('checkbox_categories.json', 'utf8'));
+
+/**
+ * Parses and sanitises the offset query argument, or returns 0
+ * The offset argument specifies which courses from the sorted dataset are returned
+ * @function  parseOffset
+ * @param   {*}   query   Any argument
+ * @returns {number}      the parsed and sanitised argument, or 0
+ */
+function parseOffset(query) {
+  if (!query) { return 0; }
+
+  const offset = parseInt(query, 10);
+  return (!offset || offset < 0) ? 0 : offset;
+}
+
+/**
+ * Converts the checkbox data sent from the frontend, into a object
+ * @function  parseCheckboxes
+ * @param   {*}     query   Any argument
+ * @returns {Object}        an object containing the parsed checkbox data from the query
+ */
+function parseCheckboxes(query) {
+  const checkboxes = { all: true };
+  if (!query) return checkboxes;
+
+  const selected_checks = query
+    .split(',')
+    .map((check) => check.trim())
+    .filter((check) => checkbox_cats.includes(check));
+
+  const length = selected_checks.length(); // if either all or no checkboxes are selected
+  checkboxes.all = length === 0 || length === checkbox_cats.length();
+
+  checkbox_cats.forEach((check) => {
+    checkboxes[check] = selected_checks.includes(check);
+  });
+
+  return checkboxes;
 }
 
 /**
@@ -16,7 +56,7 @@ function processCheckboxes(query) {
  * @returns   {boolean}             does the course Topics match with the checkboxes
  */
 function checkboxAllowed(course, checkboxes) {
-  if (checkboxes.all) return true;
+  if (checkboxes.all) { return true; }
 
   return course.input.Topic
     .split(',')
@@ -33,49 +73,52 @@ function checkboxAllowed(course, checkboxes) {
  */
 function getEmbeddings(cats) {
   // first create an empty embedding object
-  embeddings = {};
-  for (const cat of data.categories) {
+  const embeddings = {};
+  categories.forEach((cat) => {
     embeddings[cat] = 0.0;
-  }
+  });
 
   // then populate embedding object with max scores from the IBM watson categories
-  for (const cat of cats) {
-    labels = cat.label.slice(1).split('/');
-    for (const label of labels) {
-      embeddings[label] = Math.max(embeddings[label], cat.score);
-    }
-  }
+  cats.forEach((cat) => {
+    cat.label
+      .slice(1) // remove first / from the cats
+      .split('/')
+      .forEach((label) => {
+        embeddings[label] = Math.max(embeddings[label], cat.score);
+      });
+  });
   return embeddings;
 }
 
 /**
  * Compares the categories between the user and a course, producing a Mean Squared Error value
+ * - MSE(𝚨, 𝚩) = 1/n * 𝛴 (𝚨_i - 𝚩_i)²
  * @function  MSE
- * @param     {*}       userCats  the categories returned by IBM watson given the user's HE description
+ * @param     {*}       userCats  the categories returned by IBM watson from the user's input
  * @param     {*}       course    the pre-computed categories of a course from the dataset
  * @returns   {number}            the MSE value computed from the embeddings of the categories
  */
 function MSE(userCats, course) {
-  userCatsEmb = getEmbeddings(userCats);
-  courseEmb = getEmbeddings(course);
+  const userCatsEmb = getEmbeddings(userCats);
+  const courseEmb = getEmbeddings(course);
 
-  // MSE(𝚨, 𝚩) = 1/n * 𝛴 (𝚨_i - 𝚩_i)²
-  // let acc = data.categories.map((cat) => Math.pow(userCatsEmb[cat]-courseEmb[cat], 2)).reduce((x, y) => x+y, 0);
   let acc = 0;
-  for (const cat of data.categories) {
+  categories.forEach((cat) => {
     acc += (userCatsEmb[cat] - courseEmb[cat]) ** 2;
-  }
-  return acc / data.categories.length;
+  });
+  return acc / categories.length;
 }
 
 /**
  * Sorts the Skillsbuild course dataset using the MSE values for each course
  * @function  embeddingSort
- * @param     {*}   userCats            the categories returned by IBM watson given the user's HE description
- * @returns   {Array.<String, String>}  a list of courses from the dataset in order of relevance to the user's HE description
+ * @param     {*}   userCats
+ *        the categories returned by IBM watson given the user's HE description
+ * @returns   {Array.<String, String>}
+ *        a list of courses from the dataset in order of relevance to the user's HE description
  */
 function embeddingSort(userCats, checkboxes) {
-  return data.dataset
+  return dataset
     .filter((course) => checkboxAllowed(course, checkboxes))
     .map((course) => ({
       mse: MSE(userCats, course.categories), // computing MSE value for each course
@@ -83,19 +126,6 @@ function embeddingSort(userCats, checkboxes) {
     }))
     .sort((a, b) => a.mse - b.mse)
     .map((mseCourse) => mseCourse.course); // only return the course descriptions
-}
-
-/**
- * Parses and sanitises the length query argument, or returns a default
- * @function        parseLength
- * @param   {*}     query   Any argument
- * @returns {number}      the parsed and sanitised argument, or a default value
- */
-function parseLength(query) {
-  if (!query) return process.env.DEFAULT_LENGTH;
-
-  const length = parseInt(query);
-  return (!length || length < 0) ? process.env.DEFAULT_LENGTH : length;
 }
 
 // NLU (Natural Language Understanding) object allows the program to interface with IBM watson
@@ -107,14 +137,11 @@ const nlu = new NLU({
   serviceUrl: process.env.API_URL,
 });
 
-// 'data_with_classes.json' contains the SkillsBuild course dataset and a list of IBM watson categories
-const data = JSON.parse(fs.readFileSync('data_with_classes.json', 'utf8'));
-
 const express = require('express');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/search', async (req, res) => {
   if (!req.query.text) {
     res.json({ error: 'No text provided!', code: 1 });
     return;
@@ -134,8 +161,10 @@ router.get('/', async (req, res) => {
       return;
     }
 
-    const length = parseLength(req.query.length);
-    const searchResults = embeddingSort(result.result.categories).slice(0, length);
+    const offset = parseOffset(req.query.offset);
+    const checkboxes = parseCheckboxes(req.query.categories);
+    const searchResults = embeddingSort(result.result.categories, checkboxes)
+      .slice(offset, offset + process.env.DEFAULT_LENGTH);
     res.json(searchResults);
   }).catch((err) => {
     // {"error":"not enough text for language id","code":422}
@@ -144,10 +173,16 @@ router.get('/', async (req, res) => {
   });
 });
 
+router.get('/categories', async (req, res) => {
+  res.json(checkbox_cats);
+});
+
 module.exports = {
   router,
   MSE,
-  parseLength,
+  parseOffset,
+  parseCheckboxes,
+  checkboxAllowed,
   getEmbeddings,
   embeddingSort,
 };
