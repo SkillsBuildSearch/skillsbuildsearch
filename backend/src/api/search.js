@@ -6,9 +6,9 @@ const { IamAuthenticator } = require('ibm-watson/auth');
 require('dotenv').config();
 
 // loading the dataset & additional data from disk
-const dataset = JSON.parse(fs.readFileSync('dataset.json', 'utf8'));
-const categories = JSON.parse(fs.readFileSync('embeddings_categories.json', 'utf8'));
-const checkboxCats = JSON.parse(fs.readFileSync('checkbox_categories.json', 'utf8'));
+const dataset = JSON.parse(fs.readFileSync('data/dataset_with_categories.json', 'utf8'));
+const embeddingCats = JSON.parse(fs.readFileSync('data/embedding_categories.json', 'utf8'));
+const checkboxCats = JSON.parse(fs.readFileSync('data/checkbox_categories.json', 'utf8'));
 
 /**
  * Parses and sanitises the offset query argument, or returns 0
@@ -75,7 +75,7 @@ function checkboxAllowed(course, checkboxes) {
 function getEmbeddings(cats) {
   // first create an empty embedding object
   const embeddings = {};
-  categories.forEach((cat) => {
+  embeddingCats.forEach((cat) => {
     embeddings[cat] = 0.0;
   });
 
@@ -104,10 +104,10 @@ function MSE(userCats, course) {
   const courseEmb = getEmbeddings(course);
 
   let acc = 0;
-  categories.forEach((cat) => {
+  embeddingCats.forEach((cat) => {
     acc += (userCatsEmb[cat] - courseEmb[cat]) ** 2;
   });
-  return acc / categories.length;
+  return acc / embeddingCats.length;
 }
 
 /**
