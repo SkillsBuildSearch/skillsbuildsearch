@@ -1,3 +1,4 @@
+const express = require('express');
 const fs = require('fs');
 const NLU = require('ibm-watson/natural-language-understanding/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
@@ -7,7 +8,7 @@ require('dotenv').config();
 // loading the dataset & additional data from disk
 const dataset = JSON.parse(fs.readFileSync('dataset.json', 'utf8'));
 const categories = JSON.parse(fs.readFileSync('embeddings_categories.json', 'utf8'));
-const checkbox_cats = JSON.parse(fs.readFileSync('checkbox_categories.json', 'utf8'));
+const checkboxCats = JSON.parse(fs.readFileSync('checkbox_categories.json', 'utf8'));
 
 /**
  * Parses and sanitises the offset query argument, or returns 0
@@ -24,25 +25,25 @@ function parseOffset(query) {
 }
 
 /**
- * Converts the checkbox data sent from the frontend, into a object
+ * Converts and validates the checkbox bits sent from the frontend, into a object
  * @function  parseCheckboxes
  * @param   {*}     query   Any argument
- * @returns {Object}        an object containing the parsed checkbox data from the query
+ * @returns {Object}        an object containing the parsed checkbox bits from the query
  */
 function parseCheckboxes(query) {
-  const checkboxes = { all: true };
+  const checkboxes = { ignore: true };
   if (!query) return checkboxes;
 
-  const selected_checks = query
-    .split(',')
-    .map((check) => check.trim())
-    .filter((check) => checkbox_cats.includes(check));
+  const bits = parseInt(query, 10); // the checkboxes are stored as the bits of an int
 
-  const length = selected_checks.length(); // if either all or no checkboxes are selected
-  checkboxes.all = length === 0 || length === checkbox_cats.length();
+  /* eslint-disable-next-line no-bitwise */
+  const edgeChecks = bits <= 0 || bits >= 1 << (checkboxCats.length + 1) - 1;
+  if (!bits || edgeChecks) return checkboxes;
 
-  checkbox_cats.forEach((check) => {
-    checkboxes[check] = selected_checks.includes(check);
+  checkboxes.ignore = false; // if edgeChecks is true, either all or no checkboxes are checked
+  checkboxCats.forEach((check, idx) => {
+    /* eslint-disable-next-line no-bitwise */
+    checkboxes[check] = bits & (1 << idx);
   });
 
   return checkboxes;
@@ -56,13 +57,13 @@ function parseCheckboxes(query) {
  * @returns   {boolean}             does the course Topics match with the checkboxes
  */
 function checkboxAllowed(course, checkboxes) {
-  if (checkboxes.all) { return true; }
+  if (checkboxes.ignore) { return true; }
 
   return course.input.Topic
     .split(',')
     .map((topic) => topic.trim())
     .filter((topic) => checkboxes[topic])
-    .length() > 0;
+    .length > 0;
 }
 
 /**
@@ -137,10 +138,7 @@ const nlu = new NLU({
   serviceUrl: process.env.API_URL,
 });
 
-const express = require('express');
-
 const router = express.Router();
-
 router.get('/search', async (req, res) => {
   if (!req.query.text) {
     res.json({ error: 'No text provided!', code: 1 });
@@ -162,19 +160,17 @@ router.get('/search', async (req, res) => {
     }
 
     const offset = parseOffset(req.query.offset);
-    const checkboxes = parseCheckboxes(req.query.categories);
+    const checkboxes = parseCheckboxes(req.query.checkboxes);
     const searchResults = embeddingSort(result.result.categories, checkboxes)
       .slice(offset, offset + process.env.DEFAULT_LENGTH);
     res.json(searchResults);
   }).catch((err) => {
-    // {"error":"not enough text for language id","code":422}
-    // let error = JSON.parse(error.body);
-    res.json(err.body);
+    res.json(err.body); // TODO: proper error handling
   });
 });
 
 router.get('/categories', async (req, res) => {
-  res.json(checkbox_cats);
+  res.json(checkboxCats);
 });
 
 module.exports = {
