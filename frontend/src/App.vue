@@ -46,18 +46,7 @@ export default {
   data() {
     return {
       showResults: false,
-      categories: {
-        "Artificial Intelligence": true,
-        Capstone: true,
-        "Data Science": true,
-        "IBM Automation": true,
-        "IBM Cloud": true,
-        "IBM Engineering": true,
-        "IBM Security": true,
-        "IBM Z": true,
-        "Red Hat Academy": true,
-        "IBM Quantum": true,
-      },
+      categories: {},
       results: [],
     };
   },
@@ -104,6 +93,9 @@ export default {
         });
       });
     },
+  },
+  mounted() {
+    this.loadCategories();
   },
 };
 </script>
