@@ -55,7 +55,6 @@ export default {
       let uri = `http://localhost:5001/api/v1/search?text=${encodeURIComponent(
         text
       )}`;
-      
       let catEncoding = 0;
       Object.entries(this.categories).forEach((value, idx) => {
         /* eslint-disable-next-line no-bitwise */
