@@ -1,9 +1,6 @@
-# skillsbuildsearch
-TT
+# SkillsBuildSearch
 
-Using Node LTS 18.12.1.
-
-Going to include Bootstrap CDN
+Using Node LTS 18.14.2
 
 ## How to run frontend development version
 
