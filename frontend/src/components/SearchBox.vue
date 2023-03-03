@@ -8,6 +8,7 @@
       aria-describedby="search-button"
       @keyup.enter.prevent="submit"
       v-model="searchText"
+      maxlength="1000"
     />
     <button
       @click="submit"
@@ -35,7 +36,9 @@ export default {
   },
   methods: {
     submit() {
-      this.$emit("search", this.searchText);
+      if (this.searchText.length > 20) {
+        this.$emit("search", this.searchText);
+      }
     },
   },
 };
