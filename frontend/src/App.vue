@@ -61,7 +61,6 @@ export default {
   },
   methods: {
     loadResults(text, offset, append) {
-
       let uri = `http://localhost:5001/api/v1/search?text=${encodeURIComponent(
         text
       )}`;
