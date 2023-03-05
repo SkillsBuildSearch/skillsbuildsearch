@@ -2,6 +2,7 @@
 import PageHeader from "./components/PageHeader.vue";
 import SearchBox from "./components/SearchBox.vue";
 import SearchResults from "./components/SearchResults.vue";
+import SignUpBox from "./components/SignUpBox.vue";
 </script>
 
 <template>
@@ -32,6 +33,7 @@ import SearchResults from "./components/SearchResults.vue";
           </div>
         </div>
       </div>
+      <SignUpBox></SignUpBox>
     </div>
   </main>
 </template>
@@ -42,22 +44,12 @@ export default {
     PageHeader,
     SearchBox,
     SearchResults,
+    SignUpBox,
   },
   data() {
     return {
       showResults: false,
-      categories: {
-        "Artificial Intelligence": true,
-        Capstone: true,
-        "Data Science": true,
-        "IBM Automation": true,
-        "IBM Cloud": true,
-        "IBM Engineering": true,
-        "IBM Security": true,
-        "IBM Z": true,
-        "Red Hat Academy": true,
-        "IBM Quantum": true,
-      },
+      categories: {},
       results: [],
     };
   },
@@ -66,7 +58,6 @@ export default {
       let uri = `http://localhost:5001/api/v1/search?text=${encodeURIComponent(
         text
       )}`;
-      
       let catEncoding = 0;
       Object.entries(this.categories).forEach((value, idx) => {
         /* eslint-disable-next-line no-bitwise */
@@ -104,6 +95,9 @@ export default {
         });
       });
     },
+  },
+  mounted() {
+    this.loadCategories();
   },
 };
 </script>
