@@ -1,9 +1,14 @@
 const express = require('express');
 const fs = require('fs');
+const multer = require('multer');
 const NLU = require('ibm-watson/natural-language-understanding/v1');
+const STT = require('ibm-watson/speech-to-text/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
 require('dotenv').config();
+
+const DEFAULT_LENGTH = 5;
+const MIN_TEXT_LENGTH = 10;
 
 // loading the dataset & additional data from disk
 const dataset = JSON.parse(fs.readFileSync('data/dataset_with_categories.json', 'utf8'));
@@ -133,9 +138,9 @@ function embeddingSort(userCats, checkboxes) {
 const nlu = new NLU({
   version: '2022-04-07',
   authenticator: new IamAuthenticator({
-    apikey: process.env.API_KEY,
+    apikey: process.env.NLU_API_KEY,
   }),
-  serviceUrl: process.env.API_URL,
+  serviceUrl: process.env.NLU_API_URL,
 });
 
 const router = express.Router();
@@ -145,15 +150,21 @@ router.get('/search', async (req, res) => {
     return;
   }
 
-  // the nlu function 'analyze' will make the call to IBM Watson's API
-  nlu.analyze({
+  const params = {
     text: req.query.text,
     features: {
       categories: {
         limit: 20,
       },
     },
-  }).then((result) => {
+  };
+  // default language as en-gb if too little text
+  if (params.text.length < MIN_TEXT_LENGTH) {
+    params.language = 'en-gb';
+  }
+
+  // the nlu function 'analyze' will make the call to IBM Watson's API
+  nlu.analyze(params).then((result) => {
     if (result.error) {
       res.json({ error: 'An error occurred!', code: 2 });
       return;
@@ -162,15 +173,50 @@ router.get('/search', async (req, res) => {
     const offset = parseOffset(req.query.offset);
     const checkboxes = parseCheckboxes(req.query.checkboxes);
     const searchResults = embeddingSort(result.result.categories, checkboxes)
-      .slice(offset, offset + process.env.DEFAULT_LENGTH);
+      .slice(offset, offset + DEFAULT_LENGTH);
     res.json(searchResults);
-  }).catch((err) => {
-    res.json(err.body); // TODO: proper error handling
+  }).catch((error) => {
+    /* eslint-disable-next-line no-console */
+    console.error(`ERROR ${error}`);
+    res.json(error.body); // TODO: proper error handling
   });
 });
 
 router.get('/categories', async (req, res) => {
   res.json(checkboxCats);
+});
+
+const stt = new STT({
+  authenticator: new IamAuthenticator({
+    apikey: process.env.STT_API_KEY,
+  }),
+  serviceUrl: process.env.STT_API_URL,
+});
+
+const upload = multer({ storage: multer.memoryStorage() });
+router.post('/stt', upload.single('audio'), async (req, res) => {
+  // console.log(req.file);
+  stt.recognize({
+    audio: req.file.buffer,
+    contentType: 'audio/mp3',
+    model: 'en-GB_Telephony',
+  }).then((result) => {
+    if (!result.result || !result.result.results) {
+      res.json({ error: 'An error occured', code: 2 });
+    }
+
+    const finalText = result.result.results.filter((text) => text.final);
+    if (!finalText.length) {
+      res.json({ error: 'An error occured', code: 3 });
+    } else if (!finalText[0].alternatives.length) {
+      res.json({ error: 'An error occured', code: 4 });
+    }
+    res.json(finalText[0].alternatives[0].transcript);
+  }).catch((error) => {
+    /* eslint-disable-next-line no-console */
+    console.error(`ERROR ${error}`);
+    res.json(error);
+  });
 });
 
 module.exports = {

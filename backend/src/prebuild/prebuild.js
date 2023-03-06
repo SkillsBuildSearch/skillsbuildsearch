@@ -13,9 +13,9 @@ const datasetWithCats = [];
 const nlu = new NLU({
   version: '2022-04-07',
   authenticator: new IamAuthenticator({
-    apikey: process.env.API_KEY,
+    apikey: process.env.NLU_API_KEY,
   }),
-  serviceUrl: process.env.API_URL,
+  serviceUrl: process.env.NLU_API_URL,
 });
 
 /**
@@ -75,19 +75,29 @@ function processResults(course, result) {
  * @param     {*} idx     the idx of the course in the dataset, used for timeout
  */
 async function processCourse(course, idx) {
-  await timeout(idx * 250);
-  /* eslint-disable-next-line no-console */
-  console.log(`Processing ${course.Title}`);
-  const result = await nlu.analyze({
+  await timeout(idx * 350);
+  nlu.analyze({
     text: getAnalysisText(course),
     features: {
       categories: {
         limit: 20,
       },
     },
+  }).then((result) => {
+    /* eslint-disable-next-line no-console */
+    console.log(`Processing ${course.Title}`);
+    processResults(course, result);
+  }).catch((error) => {
+    if (error.headers) { // IBM watson error, possible API key issue
+      const body = JSON.parse(error.body);
+      /* eslint-disable-next-line no-console */
+      console.error(`ERROR ${error.message}\n${body.errorCode}: ${body.errorMessage}`);
+    } else { // possible API url issue
+      /* eslint-disable-next-line no-console */
+      console.error(`ERROR ${error}`);
+    }
+    process.exit(1);
   });
-
-  processResults(course, result);
 }
 
 /**
