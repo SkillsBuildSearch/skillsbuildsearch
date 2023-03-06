@@ -1,20 +1,32 @@
 <template>
   <div>
-    <div v-for="result in results" :key="result.link">
-      <h2>
-        <a :href="result.Link">{{ result.Title }}</a>
-      </h2>
-      <span
-        v-for="topic in result.Topic.split(', ')"
-        :key="topic"
-        class="badge bg-secondary me-1"
+    <div class="d-flex justify-content-center">
+      <div
+        v-if="loading"
+        class="spinner-border"
+        role="status"
+        style="width: 3rem; height: 3rem"
       >
-        {{ topic }}
-      </span>
-      <p>{{ result.Description_short }}</p>
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
+    <template v-if="!loading">
+      <div v-for="result in results" :key="result.link">
+        <h2>
+          <a :href="result.Link">{{ result.Title }}</a>
+        </h2>
+        <span
+          v-for="topic in result.Topic.split(', ')"
+          :key="topic"
+          class="badge bg-secondary me-1"
+        >
+          {{ topic }}
+        </span>
+        <p>{{ result.Description_short }}</p>
+      </div>
+    </template>
     <div
-      class="d-flex justify-content-center"
+      class="d-flex justify-content-center mt-3"
       v-if="results.length < totalResults && results.length"
     >
       <button
@@ -33,6 +45,7 @@ export default {
   props: {
     results: Array,
     totalResults: Number,
+    loading: Boolean,
   },
 };
 </script>

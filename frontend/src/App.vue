@@ -16,6 +16,7 @@ import SignUpBox from "./components/SignUpBox.vue";
             :results="results"
             :total-results="maxResults"
             @load-more="loadResults(lastSearch, 5, true)"
+            :loading="loading"
           />
         </div>
         <div class="col-auto">
@@ -57,10 +58,13 @@ export default {
       results: [],
       maxResults: 20,
       lastSearch: "",
+      loading: false,
     };
   },
   methods: {
     loadResults(text, offset, append) {
+      this.loading = true;
+
       let uri = `http://localhost:5001/api/v1/search?text=${encodeURIComponent(
         text
       )}`;
@@ -81,6 +85,7 @@ export default {
 
       fetch(searchRequest).then((response) => {
         if (!response.ok) {
+          this.loading = false;
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
@@ -90,6 +95,7 @@ export default {
           } else {
             this.results = data;
           }
+          this.loading = false;
           this.lastSearch = text;
         });
       });
