@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     submit() {
-      if (this.searchText.length > 20) {
+      if (this.searchText.length > 12) {
         this.$emit("search", this.searchText);
       } else {
         this.$emit("error", [

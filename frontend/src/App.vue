@@ -10,7 +10,7 @@ import ErrorAlert from "./components/ErrorAlert.vue";
   <main>
     <div class="container">
       <PageHeader />
-      <div class="row">
+      <div class="row mb-5">
         <div class="col">
           <SearchBox
             @search="loadResults"
@@ -109,17 +109,17 @@ export default {
           }
 
           response.json().then((data) => {
-            if ("error" in data) {
+            if (Object.hasOwn(data, "error")) {
               this.generateError(data.error, data.code);
-            }
-
-            if (append) {
-              this.results = this.results.concat(data);
             } else {
-              this.results = data;
+              if (append) {
+                this.results = this.results.concat(data);
+              } else {
+                this.results = data;
+              }
+              this.clearErrors();
             }
             this.loading = false;
-            this.clearErrors();
             this.lastSearch = text;
           });
         })
@@ -157,6 +157,9 @@ export default {
         });
     },
     generateError(message, code) {
+      if (this.errorMessages.length >= 3) {
+        this.errorMessages.shift();
+      }
       this.errorMessages.push({
         id: Date.now(),
         message: message,
