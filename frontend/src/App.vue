@@ -119,7 +119,7 @@ export default {
             this.lastSearch = text;
           });
         })
-        .catch((error) => {
+        .catch(() => {
           this.loading = false;
           this.generateError(
             "Failed to load search results, as the server is offline. Please try again later.",
