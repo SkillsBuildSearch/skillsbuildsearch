@@ -109,17 +109,17 @@ export default {
           }
 
           response.json().then((data) => {
-            if ("error" in data) {
+            if (Object.hasOwn(data, "error")) {
               this.generateError(data.error, data.code);
-            }
-
-            if (append) {
-              this.results = this.results.concat(data);
             } else {
-              this.results = data;
+              if (append) {
+                this.results = this.results.concat(data);
+              } else {
+                this.results = data;
+              }
+              this.clearErrors();
             }
             this.loading = false;
-            this.clearErrors();
             this.lastSearch = text;
           });
         })
