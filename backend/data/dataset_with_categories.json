@@ -1,6 +1,20 @@
 [
   {
     "input": {
+      "Title": "Getting Started with Enterprise-grade AI",
+      "Description_short": "This course covers the foundations of Artificial Intelligence for business, including the following topics: AI Evolution, AI Industry Adoption Trends, Natural Language Processing and Virtual Agents.",
+      "Link": "https://www.ibm.com/academic/topic/artificial-intelligence?ach_id=256c0f15-a1f2-4b9e-b672-63f4d8b20018",
+      "Topic": "Artificial Intelligence, Capstone"
+    },
+    "categories": [
+      {
+        "score": 0.99996,
+        "label": "/technology & computing/artificial intelligence"
+      }
+    ]
+  },
+  {
+    "input": {
       "Title": "OpenDS4All",
       "Description_short": "OpenDS4All is a project created to accelerate the creation of data science curriculum at academic institutions. The project hosts educational modules that may be used as building blocks for a data science curriculum.",
       "Link": "https://github.com/odpi/OpenDS4All/",
@@ -14,6 +28,20 @@
       {
         "score": 0.960032,
         "label": "/technology & computing/computing/data storage and warehousing"
+      }
+    ]
+  },
+  {
+    "input": {
+      "Title": "IBM Watson Machine Learning Essentials",
+      "Description_short": "Watson Machine Learning is a service on IBM Cloud with features for training and deploying machine learning models and neural networks. This course consists of a series of videos showing how to use the Watson Machine Learning in Watson Studio.",
+      "Link": "https://www.ibm.com/academic/topic/artificial-intelligence?ach_id=463ba684-87d1-4355-853a-ec66814584d9",
+      "Topic": "Artificial Intelligence"
+    },
+    "categories": [
+      {
+        "score": 0.999491,
+        "label": "/technology & computing/artificial intelligence"
       }
     ]
   },
@@ -46,6 +74,80 @@
       {
         "score": 0.948477,
         "label": "/technology & computing/computing/data storage and warehousing"
+      }
+    ]
+  },
+  {
+    "input": {
+      "Title": "IBM Watson Knowledge Catalog Essentials",
+      "Description_short": "IBM Watson Knowledge Catalog is a secure enterprise catalog to index, classify, and govern your data with greater efficiency. Manage your data from every angle giving you a 360-degree view of your data so you can create models, uncover insights, and collaborate more effectively.",
+      "Link": "https://www.ibm.com/academic/topic/artificial-intelligence?ach_id=4eb246ce-2c42-485e-a50a-47815da40831",
+      "Topic": "Artificial Intelligence"
+    },
+    "categories": [
+      {
+        "score": 0.998004,
+        "label": "/technology & computing/artificial intelligence"
+      }
+    ]
+  },
+  {
+    "input": {
+      "Title": "Getting Started with Enterprise Data Science",
+      "Description_short": "This course provides a basic understanding of the foundations of Data Science including: Data Science Team Roles, Data Analysis Tools, and real-world use cases for the application of the Data Science method.",
+      "Link": "https://www.ibm.com/academic/topic/capstone?ach_id=8d72f699-26ac-4542-a701-6b69f50e6b5f",
+      "Topic": "Capstone, Data Science"
+    },
+    "categories": [
+      {
+        "score": 0.987121,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.971237,
+        "label": "/science/environment"
+      },
+      {
+        "score": 0.955297,
+        "label": "/television/science fiction tv"
+      },
+      {
+        "score": 0.712504,
+        "label": "/education"
+      },
+      {
+        "score": 0.632955,
+        "label": "/education/college education"
+      }
+    ]
+  },
+  {
+    "input": {
+      "Title": "Getting Started with Threat Intelligence and Hunting",
+      "Description_short": "This is a foundational course, exposing the learner to threat intelligence concepts including: Attack trends by geography, threat intelligence tools and real-world use cases. Complete this course to get your badge.",
+      "Link": "https://www.ibm.com/academic/topic/capstone?ach_id=3f13c64c-c7ca-45d8-bce1-f05711460f09",
+      "Topic": "Capstone"
+    },
+    "categories": [
+      {
+        "score": 0.705334,
+        "label": "/news and politics/politics/war and conflicts"
+      },
+      {
+        "score": 0.70265,
+        "label": "/technology & computing/artificial intelligence"
+      },
+      {
+        "score": 0.591031,
+        "label": "/pets/birds"
+      },
+      {
+        "score": 0.545473,
+        "label": "/pets/dogs"
+      },
+      {
+        "score": 0.522375,
+        "label": "/education/adult education"
       }
     ]
   },
@@ -167,148 +269,6 @@
   },
   {
     "input": {
-      "Title": "IBM Watson Machine Learning Essentials",
-      "Description_short": "Watson Machine Learning is a service on IBM Cloud with features for training and deploying machine learning models and neural networks. This course consists of a series of videos showing how to use the Watson Machine Learning in Watson Studio.",
-      "Link": "https://www.ibm.com/academic/topic/artificial-intelligence?ach_id=463ba684-87d1-4355-853a-ec66814584d9",
-      "Topic": "Artificial Intelligence"
-    },
-    "categories": [
-      {
-        "score": 0.999491,
-        "label": "/technology & computing/artificial intelligence"
-      }
-    ]
-  },
-  {
-    "input": {
-      "Title": "Getting Started with Enterprise-grade AI",
-      "Description_short": "This course covers the foundations of Artificial Intelligence for business, including the following topics: AI Evolution, AI Industry Adoption Trends, Natural Language Processing and Virtual Agents.",
-      "Link": "https://www.ibm.com/academic/topic/artificial-intelligence?ach_id=256c0f15-a1f2-4b9e-b672-63f4d8b20018",
-      "Topic": "Artificial Intelligence, Capstone"
-    },
-    "categories": [
-      {
-        "score": 0.99996,
-        "label": "/technology & computing/artificial intelligence"
-      }
-    ]
-  },
-  {
-    "input": {
-      "Title": "IBM Cognos Framework Manager - Design Metadata Models",
-      "Description_short": "This course provides an introduction to advanced knowledge of metadata modeling concepts, and how to model metadata for predictable reporting and analysis results using IBM Cognos Framework Manager.",
-      "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=c6009472-5471-4d40-a3d4-c68fde05ceb4",
-      "Topic": "Data Science"
-    },
-    "categories": [
-      {
-        "score": 0.925294,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.809761,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.733551,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.630288,
-        "label": "/automotive/auto body styles/sedan"
-      }
-    ]
-  },
-  {
-    "input": {
-      "Title": "IBM Cognos Analytics - Author Reports Advanced",
-      "Description_short": "This course teaches experienced authors advanced report building techniques to enhance, customize, manage, and distribute reports. Additionally, the student will learn how to create highly interactive and engaging reports that can be run offline by creating Active Reports.",
-      "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=31fea6d3-db52-4277-9a4d-0dc964f41c80",
-      "Topic": "Data Science"
-    },
-    "categories": [
-      {
-        "score": 0.938373,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.775109,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.71506,
-        "label": "/science"
-      },
-      {
-        "score": 0.636544,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      }
-    ]
-  },
-  {
-    "input": {
-      "Title": "IBM Watson Knowledge Catalog Essentials",
-      "Description_short": "IBM Watson Knowledge Catalog is a secure enterprise catalog to index, classify, and govern your data with greater efficiency. Manage your data from every angle giving you a 360-degree view of your data so you can create models, uncover insights, and collaborate more effectively.",
-      "Link": "https://www.ibm.com/academic/topic/artificial-intelligence?ach_id=4eb246ce-2c42-485e-a50a-47815da40831",
-      "Topic": "Artificial Intelligence"
-    },
-    "categories": [
-      {
-        "score": 0.998004,
-        "label": "/technology & computing/artificial intelligence"
-      }
-    ]
-  },
-  {
-    "input": {
-      "Title": "IBM Cognos Analytics - Author Reports with Multidimensional Data",
-      "Description_short": "Through interactive demonstrations and exercises, participants will learn how to author reports that navigate and manipulate dimensional data structures using the specific dimensional functions and features available in IBM Cognos Analytics.",
-      "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=0fd39d43-923f-4c81-9d04-3eb642192833",
-      "Topic": "Data Science"
-    },
-    "categories": [
-      {
-        "score": 0.995778,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.796749,
-        "label": "/technology & computing/computing/computer software and applications"
-      }
-    ]
-  },
-  {
-    "input": {
-      "Title": "Getting Started with Enterprise Data Science",
-      "Description_short": "This course provides a basic understanding of the foundations of Data Science including: Data Science Team Roles, Data Analysis Tools, and real-world use cases for the application of the Data Science method.",
-      "Link": "https://www.ibm.com/academic/topic/capstone?ach_id=8d72f699-26ac-4542-a701-6b69f50e6b5f",
-      "Topic": "Capstone, Data Science"
-    },
-    "categories": [
-      {
-        "score": 0.987121,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.971237,
-        "label": "/science/environment"
-      },
-      {
-        "score": 0.955297,
-        "label": "/television/science fiction tv"
-      },
-      {
-        "score": 0.712504,
-        "label": "/education"
-      },
-      {
-        "score": 0.632955,
-        "label": "/education/college education"
-      }
-    ]
-  },
-  {
-    "input": {
       "Title": "Overview of IBM Cognos Analytics",
       "Description_short": "This course provides participants with a high level overview of the IBM Cognos Analytics suite of products and their underlying architecture. They will examine each component as it relates to an Analytics solution. Participants will be shown a range of resources to provide additional information.",
       "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=fcce46b0-df00-4abc-9b02-cefc3c52ef08",
@@ -335,31 +295,23 @@
   },
   {
     "input": {
-      "Title": "Getting Started with Threat Intelligence and Hunting",
-      "Description_short": "This is a foundational course, exposing the learner to threat intelligence concepts including: Attack trends by geography, threat intelligence tools and real-world use cases. Complete this course to get your badge.",
-      "Link": "https://www.ibm.com/academic/topic/capstone?ach_id=3f13c64c-c7ca-45d8-bce1-f05711460f09",
-      "Topic": "Capstone"
+      "Title": "IBM Planning Analytics - Analyze Data and Create Reports",
+      "Description_short": "This course is designed to teach analysts how to use IBM Planning Analytics to analyze data to discover trends and exceptions, create and customize reports and templates, and contribute data to plans.",
+      "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=202b1758-c742-45c3-a8d2-d227bc01c6b8",
+      "Topic": "Data Science"
     },
     "categories": [
       {
-        "score": 0.705334,
-        "label": "/news and politics/politics/war and conflicts"
+        "score": 0.995993,
+        "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.70265,
-        "label": "/technology & computing/artificial intelligence"
+        "score": 0.962747,
+        "label": "/technology & computing/computing/internet/cloud computing"
       },
       {
-        "score": 0.591031,
-        "label": "/pets/birds"
-      },
-      {
-        "score": 0.545473,
-        "label": "/pets/dogs"
-      },
-      {
-        "score": 0.522375,
-        "label": "/education/adult education"
+        "score": 0.806666,
+        "label": "/technology & computing/computing/computer software and applications"
       }
     ]
   },
@@ -415,23 +367,27 @@
   },
   {
     "input": {
-      "Title": "IBM Planning Analytics - Analyze Data and Create Reports",
-      "Description_short": "This course is designed to teach analysts how to use IBM Planning Analytics to analyze data to discover trends and exceptions, create and customize reports and templates, and contribute data to plans.",
-      "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=202b1758-c742-45c3-a8d2-d227bc01c6b8",
+      "Title": "IBM Cognos Framework Manager - Design Metadata Models",
+      "Description_short": "This course provides an introduction to advanced knowledge of metadata modeling concepts, and how to model metadata for predictable reporting and analysis results using IBM Cognos Framework Manager.",
+      "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=c6009472-5471-4d40-a3d4-c68fde05ceb4",
       "Topic": "Data Science"
     },
     "categories": [
       {
-        "score": 0.995993,
+        "score": 0.925294,
         "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.962747,
-        "label": "/technology & computing/computing/internet/cloud computing"
+        "score": 0.809761,
+        "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.806666,
-        "label": "/technology & computing/computing/computer software and applications"
+        "score": 0.733551,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.630288,
+        "label": "/automotive/auto body styles/sedan"
       }
     ]
   },
@@ -475,43 +431,45 @@
   },
   {
     "input": {
-      "Title": "IBM Process Mining Collection",
-      "Description_short": "Process mining uses business system data to create and visualize an end-to-end process that includes all the process activities involved along with the various process paths. Businesses analyze the discovered process to gain actionable insights for improvement.",
-      "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=3e44a76c-f261-4849-8f75-8c89802be296",
-      "Topic": "IBM Automation"
+      "Title": "IBM Cognos Analytics - Author Reports Advanced",
+      "Description_short": "This course teaches experienced authors advanced report building techniques to enhance, customize, manage, and distribute reports. Additionally, the student will learn how to create highly interactive and engaging reports that can be run offline by creating Active Reports.",
+      "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=31fea6d3-db52-4277-9a4d-0dc964f41c80",
+      "Topic": "Data Science"
     },
     "categories": [
       {
-        "score": 0.856652,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.776806,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.661338,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
-      },
-      {
-        "score": 0.635302,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.618643,
+        "score": 0.938373,
         "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.600004,
-        "label": "/hobbies & interests/collecting"
+        "score": 0.775109,
+        "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.587401,
-        "label": "/business and finance/industries/technology industry"
+        "score": 0.71506,
+        "label": "/science"
       },
       {
-        "score": 0.563791,
-        "label": "/business and finance/industries/manufacturing industry"
+        "score": 0.636544,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      }
+    ]
+  },
+  {
+    "input": {
+      "Title": "IBM Cognos Analytics - Author Reports with Multidimensional Data",
+      "Description_short": "Through interactive demonstrations and exercises, participants will learn how to author reports that navigate and manipulate dimensional data structures using the specific dimensional functions and features available in IBM Cognos Analytics.",
+      "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=0fd39d43-923f-4c81-9d04-3eb642192833",
+      "Topic": "Data Science"
+    },
+    "categories": [
+      {
+        "score": 0.995778,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.796749,
+        "label": "/technology & computing/computing/computer software and applications"
       }
     ]
   },
@@ -588,6 +546,48 @@
       {
         "score": 0.601319,
         "label": "/technology & computing/computing/computer software and applications/graphics software"
+      }
+    ]
+  },
+  {
+    "input": {
+      "Title": "IBM Process Mining Collection",
+      "Description_short": "Process mining uses business system data to create and visualize an end-to-end process that includes all the process activities involved along with the various process paths. Businesses analyze the discovered process to gain actionable insights for improvement.",
+      "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=3e44a76c-f261-4849-8f75-8c89802be296",
+      "Topic": "IBM Automation"
+    },
+    "categories": [
+      {
+        "score": 0.856652,
+        "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.776806,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.661338,
+        "label": "/technology & computing/computing/computer software and applications/graphics software"
+      },
+      {
+        "score": 0.635302,
+        "label": "/technology & computing/computing/desktops"
+      },
+      {
+        "score": 0.618643,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.600004,
+        "label": "/hobbies & interests/collecting"
+      },
+      {
+        "score": 0.587401,
+        "label": "/business and finance/industries/technology industry"
+      },
+      {
+        "score": 0.563791,
+        "label": "/business and finance/industries/manufacturing industry"
       }
     ]
   },
