@@ -28,8 +28,10 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      const alert = Alert.getOrCreateInstance("#alertInstance");
-      alert.close();
+      if (Alert.getInstance("#alertInstance")) {
+        const alert = Alert.getInstance("#alertInstance");
+        alert.close();
+      }
     }, 5000);
   },
 };

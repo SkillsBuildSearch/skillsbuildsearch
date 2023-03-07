@@ -109,6 +109,10 @@ export default {
           }
 
           response.json().then((data) => {
+            if ("error" in data) {
+              this.generateError(data.error, data.code);
+            }
+
             if (append) {
               this.results = this.results.concat(data);
             } else {
