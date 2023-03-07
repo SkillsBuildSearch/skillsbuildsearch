@@ -179,7 +179,7 @@ router.get('/search', async (req, res) => {
     /* eslint-disable-next-line no-console */
     console.error(`ERROR ${error}`);
     const errbody = JSON.parse(error.body);
-    console.log(typeof(errbody), errbody);
+    errbody.code = 2;
     res.json(errbody); // TODO: proper error handling
   });
 });
