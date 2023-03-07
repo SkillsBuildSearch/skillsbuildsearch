@@ -178,7 +178,9 @@ router.get('/search', async (req, res) => {
   }).catch((error) => {
     /* eslint-disable-next-line no-console */
     console.error(`ERROR ${error}`);
-    res.json(error.body); // TODO: proper error handling
+    const errbody = JSON.parse(error.body);
+    errbody.code = 2;
+    res.json(errbody); // TODO: proper error handling
   });
 });
 

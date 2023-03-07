@@ -38,6 +38,11 @@ export default {
     submit() {
       if (this.searchText.length > 20) {
         this.$emit("search", this.searchText);
+      } else {
+        this.$emit("error", [
+          "Your search term is not long enough for the results to be relevant. Please input more text.",
+          2,
+        ]);
       }
     },
   },
