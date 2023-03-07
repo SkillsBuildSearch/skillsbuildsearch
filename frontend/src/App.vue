@@ -157,6 +157,9 @@ export default {
         });
     },
     generateError(message, code) {
+      if (this.errorMessages.length >= 3) {
+        this.errorMessages.shift();
+      }
       this.errorMessages.push({
         id: Date.now(),
         message: message,
