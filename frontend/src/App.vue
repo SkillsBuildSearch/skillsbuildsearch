@@ -12,7 +12,11 @@ import SignUpBox from "./components/SignUpBox.vue";
       <div class="row">
         <div class="col">
           <SearchBox @search="loadResults" />
-          <SearchResults :results="results" />
+          <SearchResults
+            :results="results"
+            :total-results="maxResults"
+            @load-more="loadResults(lastSearch, 5, true)"
+          />
         </div>
         <div class="col-auto">
           <h2>Course categories</h2>
@@ -51,13 +55,20 @@ export default {
       showResults: false,
       categories: {},
       results: [],
+      maxResults: 20,
+      lastSearch: "",
     };
   },
   methods: {
-    loadResults(text) {
+    loadResults(text, offset, append) {
       let uri = `http://localhost:5001/api/v1/search?text=${encodeURIComponent(
         text
       )}`;
+
+      if (offset) {
+        uri += `&offset=${encodeURIComponent(offset)}`;
+      }
+
       let catEncoding = 0;
       Object.entries(this.categories).forEach((value, idx) => {
         /* eslint-disable-next-line no-bitwise */
@@ -74,7 +85,12 @@ export default {
         }
 
         response.json().then((data) => {
-          this.results = data;
+          if (append) {
+            this.results = this.results.concat(data);
+          } else {
+            this.results = data;
+          }
+          this.lastSearch = text;
         });
       });
     },
