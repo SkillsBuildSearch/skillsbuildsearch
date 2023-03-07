@@ -10,7 +10,7 @@ import ErrorAlert from "./components/ErrorAlert.vue";
   <main>
     <div class="container">
       <PageHeader />
-      <div class="row">
+      <div class="row mb-5">
         <div class="col">
           <SearchBox
             @search="loadResults"
