@@ -19,7 +19,7 @@ import SignUpBox from "./components/SignUpBox.vue";
             :loading="loading"
           />
         </div>
-        <div class="col-auto">
+        <div class="col-auto" v-if="Object.entries(categories).length > 0">
           <h2>Course categories</h2>
           <div
             v-for="category in Object.entries(categories)"
