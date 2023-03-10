@@ -33,7 +33,8 @@ function parseOffset(query) {
  * Converts and validates the checkbox bits sent from the frontend, into a object
  * @function  parseCheckboxes
  * @param   {*}     query   Any argument
- * @returns {Object}        an object containing the parsed checkbox bits from the query
+ * @returns {Object.<string, number>}
+ *    an object with (Topic / checkbox clicked) pairs, parsed from the query input
  */
 function parseCheckboxes(query) {
   const checkboxes = { ignore: true };
@@ -57,25 +58,31 @@ function parseCheckboxes(query) {
 /**
  * Checks whether a course is allowed by the checkboxes specified by the user
  * @function  checkboxAllowed
- * @param     {*}       course      a course from the dataset, including the 'Topic' attribute
- * @param     {*}       checkboxes  an object detailing which checkboxes were selected
- * @returns   {boolean}             does the course Topics match with the checkboxes
+ * @param     {Object.<string, string>} course
+ *    a course from the dataset, including the 'Topic' attribute
+ * @param     {Object.<string, number>} checkboxes
+ *    an object containing the checkbox selection information from the search request
+ * @returns   {boolean}
+ *    does the course Topics match with the checkboxes;
+ *    does this course need to be filtered based on the checkboxes selected
  */
 function checkboxAllowed(course, checkboxes) {
   if (checkboxes.ignore) { return true; }
 
   return course.input.Topic
     .split(',')
-    .map((topic) => topic.trim())
+    .map((topic) => topic.trim()) // clean up Topic attr into an array
     .filter((topic) => checkboxes[topic])
     .length > 0;
 }
 
 /**
- * Computes an embedding object from the categories returned by IBM watson
+ * Computes an embedding object from the categories returned by IBM watson.
  * @function  getEmbeddings
- * @param     {*}  cats                 A list of categories computed by IBM watson
- * @returns   {Array.<String, number>}  An embedding object containing the category data passed
+ * @param     {Array.<Object>}  cats
+ *    The category results returned by IBM Watson's NLU analysis
+ * @returns   {Object.<String, number>}
+ *    An embedding object containing the category data passed
  */
 function getEmbeddings(cats) {
   // first create an empty embedding object
@@ -90,6 +97,7 @@ function getEmbeddings(cats) {
       .slice(1) // remove first / from the cats
       .split('/')
       .forEach((label) => {
+        // use the maximum confidence score for each embedding label
         embeddings[label] = Math.max(embeddings[label], cat.score);
       });
   });
@@ -100,13 +108,22 @@ function getEmbeddings(cats) {
  * Compares the categories between the user and a course, producing a Mean Squared Error value
  * - MSE(𝚨, 𝚩) = 1/n * 𝛴 (𝚨_i - 𝚩_i)²
  * @function  MSE
- * @param     {*}       userCats  the categories returned by IBM watson from the user's input
- * @param     {*}       course    the pre-computed categories of a course from the dataset
- * @returns   {number}            the MSE value computed from the embeddings of the categories
+ * @param     {Array.<Object>}  userCats
+ *    The category results returned by IBM Watson's NLU analysis of the user's input
+ * @param     {Array.<Object>}  courseCats
+ *    The category results returned by IBM Watson's NLU analysis of a course's information
+ * @returns   {number}
+ *    the MSE value computed from the embeddings of the categories
  */
-function MSE(userCats, course) {
+function MSE(userCats, courseCats) {
   const userCatsEmb = getEmbeddings(userCats);
-  const courseEmb = getEmbeddings(course);
+  const courseEmb = getEmbeddings(courseCats);
+
+  /*
+  const acc = embeddingCats
+    .map((cat) => (userCatsEmb[cat] - courseEmb[cat]) ** 2)
+    .reduce((x, y) => x + y);
+  */
 
   let acc = 0;
   embeddingCats.forEach((cat) => {
@@ -118,10 +135,10 @@ function MSE(userCats, course) {
 /**
  * Sorts the Skillsbuild course dataset using the MSE values for each course
  * @function  embeddingSort
- * @param     {*}   userCats
- *        the categories returned by IBM watson given the user's HE description
- * @returns   {Array.<String, String>}
- *        a list of courses from the dataset in order of relevance to the user's HE description
+ * @param     {Array.<Object>}  userCats
+ *    The category results returned by IBM Watson's NLU analysis of the user's input
+ * @returns   {Array.<Object.<String, String>>}
+ *    the IBM SkillsBuild course dataset in order of relevance to the user's input
  */
 function embeddingSort(userCats, checkboxes) {
   return dataset
@@ -146,10 +163,10 @@ const nlu = new NLU({
 const router = express.Router();
 router.get('/search', async (req, res) => {
   if (!req.query.text) {
-    res.json({ error: 'No text provided!', code: 1 });
+    res.status(400).json({ error: 'No text provided!', code: 1 });
     return;
   }
-
+  // parameters sent to IBM Watson's NLU service
   const params = {
     text: req.query.text,
     features: {
@@ -166,28 +183,30 @@ router.get('/search', async (req, res) => {
   // the nlu function 'analyze' will make the call to IBM Watson's API
   nlu.analyze(params).then((result) => {
     if (result.error) {
-      res.json({ error: 'An error occurred!', code: 2 });
+      res.status(400).json({ error: 'An error occurred!', code: 2 });
       return;
     }
 
     const offset = parseOffset(req.query.offset);
     const checkboxes = parseCheckboxes(req.query.checkboxes);
     const searchResults = embeddingSort(result.result.categories, checkboxes)
-      .slice(offset, offset + DEFAULT_LENGTH);
+      .slice(offset, offset + DEFAULT_LENGTH); // if offset=0, returns top ${DEFAULT_LENGTH} courses
     res.json(searchResults);
   }).catch((error) => {
     /* eslint-disable-next-line no-console */
     console.error(`ERROR ${error}`);
     const errbody = JSON.parse(error.body);
     errbody.code = 2;
-    res.json(errbody); // TODO: proper error handling
+    res.status(400).json(errbody); // TODO: proper error handling
   });
 });
 
+// endpoint for the frontend to get the topic categories from the dataset
 router.get('/categories', async (req, res) => {
   res.json(checkboxCats);
 });
 
+// STT (Speech to Text) object allows the program to interface with IBM watson
 const stt = new STT({
   authenticator: new IamAuthenticator({
     apikey: process.env.STT_API_KEY,
@@ -200,24 +219,27 @@ router.post('/stt', upload.single('audio'), async (req, res) => {
   // console.log(req.file);
   stt.recognize({
     audio: req.file.buffer,
-    contentType: 'audio/mp3',
+    contentType: 'audio/webm',
     model: 'en-GB_Telephony',
   }).then((result) => {
     if (!result.result || !result.result.results) {
-      res.json({ error: 'An error occured', code: 2 });
+      res.status(400).json({ error: 'An error occured! Cannot transcribe speech', code: 1 });
     }
 
     const finalText = result.result.results.filter((text) => text.final);
     if (!finalText.length) {
-      res.json({ error: 'An error occured', code: 3 });
+      res.status(400).json({ error: 'An error occured! Cannot transcribe speech', code: 1 });
     } else if (!finalText[0].alternatives.length) {
-      res.json({ error: 'An error occured', code: 4 });
+      res.status(400).json({ error: 'An error occured! Cannot transcribe speech', code: 1 });
     }
-    res.json(finalText[0].alternatives[0].transcript);
+    // return the transcribed speech back to the frontend
+    res.json({
+      transcript: finalText[0].alternatives[0].transcript,
+    });
   }).catch((error) => {
     /* eslint-disable-next-line no-console */
     console.error(`ERROR ${error}`);
-    res.json(error);
+    res.status(400).json(error);
   });
 });
 

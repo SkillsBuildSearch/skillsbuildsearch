@@ -32,7 +32,8 @@ function timeout(ms) {
 /**
  * Generates some text based of a course's information which is given to IBM watson's NLU
  * @function  getAnalysisText
- * @param     {*}       course  A course object containing: Title, Desc, (Link), Topic
+ * @param     {Object.<String, String>}  course
+ *    A course object containing: Title, Desc, (Link), Topic
  * @returns   {string}
  *  A piece of text generated from the course object, representing the course
  */
@@ -44,8 +45,10 @@ function getAnalysisText(course) {
  * Takes the results from IBM watson for a specific course and extracts the relevant
  *  information to be saved to disk
  * @function  processResults
- * @param     {*} course  a course object, containing: Title, Desc, Link, Topic
- * @param     {*} result  the results object returned by IBM watson's `nlu.analyze`
+ * @param     {*} course
+ *    a course object, containing: Title, Desc, Link, Topic
+ * @param     {*} result
+ *    the results object returned by IBM watson's `nlu.analyze`
  */
 function processResults(course, result) {
   course.Topic
@@ -71,8 +74,10 @@ function processResults(course, result) {
  *   Natural Language Understanding analysis, with the results being processes
  *   and saved to disk
  * @function  processCourse
- * @param     {*} course  A course object from the dataset
- * @param     {*} idx     the idx of the course in the dataset, used for timeout
+ * @param     {*} course
+ *    A course object from the dataset
+ * @param     {*} idx
+ *    the idx of the course in the dataset, used for timeout
  */
 async function processCourse(course, idx) {
   await timeout(idx * 350);
@@ -105,14 +110,17 @@ async function processCourse(course, idx) {
  * The results stored in `checkboxCats`, `embeddingCats`, and `datasetWithCats`
  *   are written to disk.
  * @function  processDataset
- * @param {*} path  the path of the dataset file
- * @param {*} dst   the directory for the processed data to be saved to
+ * @param {*} path
+ *    the path of the dataset file
+ * @param {*} dst
+ *    the directory for the processed data to be saved to
  */
 async function processDataset(path, dst) {
   const dataset = JSON.parse(fs.readFileSync(path, 'utf8'));
   Promise.all(dataset
-    .map(processCourse))
+    .map(processCourse)) // process each course from the dataset
     .then(() => {
+      // write compiled data to disk
       fs.writeFileSync(`${dst}/checkbox_categories.json`, JSON.stringify([...checkboxCats], null, 2));
       fs.writeFileSync(`${dst}/embedding_categories.json`, JSON.stringify([...embeddingCats], null, 2));
       fs.writeFileSync(`${dst}/dataset_with_categories.json`, JSON.stringify(datasetWithCats, null, 2));
