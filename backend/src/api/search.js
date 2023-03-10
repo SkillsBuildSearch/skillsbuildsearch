@@ -200,7 +200,7 @@ router.post('/stt', upload.single('audio'), async (req, res) => {
   // console.log(req.file);
   stt.recognize({
     audio: req.file.buffer,
-    contentType: 'audio/mp3',
+    contentType: 'audio/webm',
     model: 'en-GB_Telephony',
   }).then((result) => {
     if (!result.result || !result.result.results) {
