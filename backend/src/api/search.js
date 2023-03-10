@@ -191,7 +191,7 @@ router.get('/search', async (req, res) => {
     const checkboxes = parseCheckboxes(req.query.checkboxes);
     const searchResults = embeddingSort(result.result.categories, checkboxes)
       .slice(offset, offset + DEFAULT_LENGTH); // if offset=0, returns top ${DEFAULT_LENGTH} courses
-    res.json(searchResults);
+    res.status(200).json(searchResults);
   }).catch((error) => {
     /* eslint-disable-next-line no-console */
     console.error(`ERROR ${error}`);
@@ -203,7 +203,7 @@ router.get('/search', async (req, res) => {
 
 // endpoint for the frontend to get the topic categories from the dataset
 router.get('/categories', async (req, res) => {
-  res.json(checkboxCats);
+  res.status(200).json(checkboxCats);
 });
 
 // STT (Speech to Text) object allows the program to interface with IBM watson
@@ -216,10 +216,9 @@ const stt = new STT({
 
 const upload = multer({ storage: multer.memoryStorage() });
 router.post('/stt', upload.single('audio'), async (req, res) => {
-  // console.log(req.file);
   stt.recognize({
     audio: req.file.buffer,
-    contentType: 'audio/webm',
+    contentType: req.file.mimetype,
     model: 'en-GB_Telephony',
   }).then((result) => {
     if (!result.result || !result.result.results) {
@@ -233,7 +232,7 @@ router.post('/stt', upload.single('audio'), async (req, res) => {
       res.status(400).json({ error: 'An error occured! Cannot transcribe speech', code: 1 });
     }
     // return the transcribed speech back to the frontend
-    res.json({
+    res.status(200).json({
       transcript: finalText[0].alternatives[0].transcript,
     });
   }).catch((error) => {
