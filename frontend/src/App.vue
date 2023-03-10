@@ -136,11 +136,11 @@ export default {
         });
     },
     loadCategories() {
-      const searchRequest = new Request(
+      const categoryRequest = new Request(
         "http://localhost:5001/api/v1/categories/"
       );
 
-      fetch(searchRequest)
+      fetch(categoryRequest)
         .then((response) => {
           if (!response.ok) {
             this.generateError("Server error. Please try again later.", 1);
@@ -199,14 +199,25 @@ export default {
       });
 
       this.mediaRecorder.addEventListener("stop", function () {
-        console.log("stop media recording");
+        // console.log("stop media recording");
         const audio = new Blob(recordedChunks);
         const formData = new FormData();
         formData.append("audio", audio);
-        fetch("http://localhost:5001/api/v1/stt", {
+        const postRequest = {
           method: "POST",
           body: formData,
-        });
+        };
+
+        fetch("http://localhost:5001/api/v1/stt", postRequest)
+          .then((response) => {
+            response.json().then((data) => {
+              console.log(data);
+            });
+            
+          })
+          .catch(() => {
+
+          });
         this.isRecording = false;
       });
     },
