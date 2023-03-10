@@ -11,6 +11,16 @@
       maxlength="1000"
     />
     <button
+      @click="voice"
+      class="btn btn-outline btn-outline-secondary"
+      type="button"
+    >
+      <i
+        class="bi"
+        :class="{ 'bi-mic': !voiceActive, 'bi-mic-fill': voiceActive }"
+      ></i>
+    </button>
+    <button
       @click="submit"
       class="btn btn-outline-primary"
       type="button"
@@ -34,6 +44,10 @@ export default {
       searchText: "",
     };
   },
+  props: {
+    voiceActive: Boolean,
+  },
+  emits: ["voice", "search", "error"],
   methods: {
     submit() {
       if (this.searchText.length > 12) {
@@ -44,6 +58,9 @@ export default {
           2,
         ]);
       }
+    },
+    voice() {
+      this.$emit("voice");
     },
   },
 };
