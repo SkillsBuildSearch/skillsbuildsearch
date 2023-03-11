@@ -15,8 +15,6 @@ import ErrorAlert from "./components/ErrorAlert.vue";
           <SearchBox
             @search="loadResults"
             @error="generateError($event[0], $event[1])"
-            @voice="toggleRecord()"
-            :voice-active="isRecording"
           />
           <ErrorAlert
             v-for="error in errorMessages"
@@ -73,8 +71,6 @@ export default {
       lastSearch: "",
       loading: false,
       errorMessages: [],
-      mediaRecorder: {},
-      isRecording: false,
     };
   },
   methods: {
@@ -172,64 +168,6 @@ export default {
     },
     clearErrors() {
       this.errorMessages = [];
-    },
-    audioSetup() {
-      // Check if browser supports recording audio.
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        alert("Your browser does not support audio recording.");
-        return;
-      }
-
-      navigator.mediaDevices
-        .getUserMedia({ audio: true, video: false })
-        .then(this.recordVoice)
-        .then(() => {
-          console.log(this.mediaRecorder);
-          this.mediaRecorder.start();
-        });
-    },
-    recordVoice(stream) {
-      this.isRecording = true;
-      const options = { contentType: "audio/webm" };
-      const recordedChunks = [];
-      this.mediaRecorder = new MediaRecorder(stream, options);
-
-      this.mediaRecorder.addEventListener("dataavailable", function (e) {
-        if (e.data.size > 0) recordedChunks.push(e.data);
-      });
-
-      this.mediaRecorder.addEventListener("stop", function () {
-        // console.log("stop media recording");
-        const audio = new Blob(recordedChunks);
-        const formData = new FormData();
-        formData.append("audio", audio);
-        const postRequest = {
-          method: "POST",
-          body: formData,
-        };
-
-        fetch("http://localhost:5001/api/v1/stt", postRequest)
-          .then((response) => {
-            response.json().then((data) => {
-              console.log(data);
-            });
-            
-          })
-          .catch(() => {
-
-          });
-        this.isRecording = false;
-      });
-    },
-    toggleRecord() {
-      // Check if recorder is running, and start stop depending on state
-      if (this.isRecording) {
-        console.log("button pressed");
-        this.mediaRecorder.stop();
-        this.isRecording = false;
-      } else {
-        this.audioSetup();
-      }
     },
   },
   mounted() {
