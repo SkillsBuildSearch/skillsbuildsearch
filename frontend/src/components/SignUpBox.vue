@@ -63,12 +63,14 @@ export default {
     },
   },
   mounted() {
-    const signUpModal = new Modal("#signUpModal", {
-      keyboard: false,
-    });
-    if (this.getCookie()) {
-      signUpModal.show();
-    }
+    setTimeout(() => {
+      const signUpModal = new Modal("#signUpModal", {
+        keyboard: false,
+      });
+      if (this.getCookie()) {
+        signUpModal.show();
+      }
+    }, 1000);
   },
 };
 </script>
