@@ -9,11 +9,13 @@
       @keyup.enter.prevent="submit"
       maxlength="1000"
       v-model="searchText"
+      ref="searchInput"
     />
     <button
       @click="toggleRecord()"
       class="btn btn-outline btn-outline-secondary"
       type="button"
+      ref="voiceButton"
     >
       <i
         class="bi"
