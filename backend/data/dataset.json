@@ -53,14 +53,14 @@
     "Description_short":
       "This is a foundational course, exposing the learner to threat intelligence concepts including: Attack trends by geography, threat intelligence tools and real-world use cases. Complete this course to get your badge.",
     "Link": "https://www.ibm.com/academic/topic/capstone?ach_id=3f13c64c-c7ca-45d8-bce1-f05711460f09",
-    "Topic": "Capstone"
+    "Topic": "Capstone, IBM Security"
   },
   {
     "Title": "Getting Started with Cloud for the Enterprise",
     "Description_short":
       "This course covers the basic foundations of cloud for the enterprise including: Consumer applications, Enterprise adoption, Delivery models and Industry Cloud Adoption.",
     "Link": "https://www.ibm.com/academic/topic/capstone?ach_id=b9de26db-b689-4894-bcad-5aa28deec936",
-    "Topic": "Capstone"
+    "Topic": "Capstone, IBM Cloud"
   },
   {
     "Title": "Constraint Programming with ILOG CP Optimizer",

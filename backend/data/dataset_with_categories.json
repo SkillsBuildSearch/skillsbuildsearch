@@ -295,28 +295,6 @@
   },
   {
     "input": {
-      "Title": "IBM Planning Analytics - Analyze Data and Create Reports",
-      "Description_short": "This course is designed to teach analysts how to use IBM Planning Analytics to analyze data to discover trends and exceptions, create and customize reports and templates, and contribute data to plans.",
-      "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=202b1758-c742-45c3-a8d2-d227bc01c6b8",
-      "Topic": "Data Science"
-    },
-    "categories": [
-      {
-        "score": 0.995993,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.962747,
-        "label": "/technology & computing/computing/internet/cloud computing"
-      },
-      {
-        "score": 0.806666,
-        "label": "/technology & computing/computing/computer software and applications"
-      }
-    ]
-  },
-  {
-    "input": {
       "Title": "IBM Planning Analytics - Design & Develop Models in Workspace",
       "Description_short": "This course is designed to teach modelers how to build a complete model in IBM Planning Analytics. Through a series of lectures and hands-on exercises, students will learn how to set up dimensions and cubes, manually enter data into these structures, and define the data that users can see.",
       "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=94366672-0dd3-4ac6-bf44-9a0d78c43926",
@@ -362,6 +340,28 @@
       {
         "score": 0.556397,
         "label": "/technology & computing/computing/computer software and applications/video software"
+      }
+    ]
+  },
+  {
+    "input": {
+      "Title": "IBM Planning Analytics - Analyze Data and Create Reports",
+      "Description_short": "This course is designed to teach analysts how to use IBM Planning Analytics to analyze data to discover trends and exceptions, create and customize reports and templates, and contribute data to plans.",
+      "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=202b1758-c742-45c3-a8d2-d227bc01c6b8",
+      "Topic": "Data Science"
+    },
+    "categories": [
+      {
+        "score": 0.995993,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.962747,
+        "label": "/technology & computing/computing/internet/cloud computing"
+      },
+      {
+        "score": 0.806666,
+        "label": "/technology & computing/computing/computer software and applications"
       }
     ]
   },
@@ -655,6 +655,64 @@
   },
   {
     "input": {
+      "Title": "Overview of Process Mining",
+      "Description_short": "This course introduces students to IBM Process Mining. Students will learn the differences between process mining and task mining, the different phases of process mining, use cases, and how process mining is performed. Students will also learn how to use IBM Process Mining to import data sources, map data, and how to visualize a process, along with the introduction to other major features of process mining.",
+      "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=d4536c1f-3c0c-4350-b675-0b7f29820ae0",
+      "Topic": "IBM Automation"
+    },
+    "categories": [
+      {
+        "score": 0.823052,
+        "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.728522,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.638749,
+        "label": "/technology & computing/computing/computer software and applications/graphics software"
+      },
+      {
+        "score": 0.623589,
+        "label": "/business and finance/industries"
+      },
+      {
+        "score": 0.603785,
+        "label": "/business and finance/industries/technology industry"
+      },
+      {
+        "score": 0.588544,
+        "label": "/technology & computing/computing/desktops"
+      },
+      {
+        "score": 0.58743,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.58653,
+        "label": "/business and finance/industries/manufacturing industry"
+      },
+      {
+        "score": 0.581686,
+        "label": "/technology & computing/artificial intelligence"
+      },
+      {
+        "score": 0.577597,
+        "label": "/technology & computing/consumer electronics/home entertainment systems"
+      },
+      {
+        "score": 0.570534,
+        "label": "/technology & computing/computing/programming languages"
+      },
+      {
+        "score": 0.567554,
+        "label": "/technology & computing/computing/computer software and applications/video software"
+      }
+    ]
+  },
+  {
+    "input": {
       "Title": "IBM Robotic Process Automation - Basic II",
       "Description_short": "RPA Basic II is a continuation of the Basic I course, where students will further their RPA skills and learn more in-depth and essential concepts for the development of the programmer within IBM RPA resources. This course covers the use of assets, parameters, and the manipulation of PDFs, data tables, and databases",
       "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=ca833692-6a84-4db4-828e-44f38b7e432a",
@@ -712,64 +770,6 @@
       {
         "score": 0.508577,
         "label": "/business and finance/business/business administration"
-      }
-    ]
-  },
-  {
-    "input": {
-      "Title": "Overview of Process Mining",
-      "Description_short": "This course introduces students to IBM Process Mining. Students will learn the differences between process mining and task mining, the different phases of process mining, use cases, and how process mining is performed. Students will also learn how to use IBM Process Mining to import data sources, map data, and how to visualize a process, along with the introduction to other major features of process mining.",
-      "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=d4536c1f-3c0c-4350-b675-0b7f29820ae0",
-      "Topic": "IBM Automation"
-    },
-    "categories": [
-      {
-        "score": 0.823052,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.728522,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.638749,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
-      },
-      {
-        "score": 0.623589,
-        "label": "/business and finance/industries"
-      },
-      {
-        "score": 0.603785,
-        "label": "/business and finance/industries/technology industry"
-      },
-      {
-        "score": 0.588544,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.58743,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.58653,
-        "label": "/business and finance/industries/manufacturing industry"
-      },
-      {
-        "score": 0.581686,
-        "label": "/technology & computing/artificial intelligence"
-      },
-      {
-        "score": 0.577597,
-        "label": "/technology & computing/consumer electronics/home entertainment systems"
-      },
-      {
-        "score": 0.570534,
-        "label": "/technology & computing/computing/programming languages"
-      },
-      {
-        "score": 0.567554,
-        "label": "/technology & computing/computing/computer software and applications/video software"
       }
     ]
   },

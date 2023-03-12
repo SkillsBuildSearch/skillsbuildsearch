@@ -6,9 +6,7 @@ const STT = require('ibm-watson/speech-to-text/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
 require('dotenv').config();
-
-const DEFAULT_LENGTH = 5;
-const MIN_TEXT_LENGTH = 10;
+const config = require('config');
 
 // loading the dataset & additional data from disk
 const dataset = JSON.parse(fs.readFileSync('data/dataset_with_categories.json', 'utf8'));
@@ -19,8 +17,8 @@ const checkboxCats = JSON.parse(fs.readFileSync('data/checkbox_categories.json',
  * Parses and sanitises the offset query argument, or returns 0
  * The offset argument specifies which courses from the sorted dataset are returned
  * @function  parseOffset
- * @param   {*}   query   Any argument
- * @returns {number}      the parsed and sanitised argument, or 0
+ * @param     {*}   query   Any argument
+ * @returns   {number}      the parsed and sanitised argument, or 0
  */
 function parseOffset(query) {
   if (!query) { return 0; }
@@ -32,21 +30,24 @@ function parseOffset(query) {
 /**
  * Converts and validates the checkbox bits sent from the frontend, into a object
  * @function  parseCheckboxes
- * @param   {*}     query   Any argument
- * @returns {Object.<string, number>}
+ * @param     {*}     query   Any argument
+ * @returns   {Object.<string, number>}
  *    an object with (Topic / checkbox clicked) pairs, parsed from the query input
  */
 function parseCheckboxes(query) {
-  const checkboxes = { ignore: true };
-  if (!query) return checkboxes;
+  if (!query || !query.match(/^\d+$/)) return { ignore: true };
 
   const bits = parseInt(query, 10); // the checkboxes are stored as the bits of an int
 
+  // ignore if bits is undefined, leq 0, or gt max possible valid integer
+  //  (given number of checkbox categories)
   /* eslint-disable-next-line no-bitwise */
-  const edgeChecks = bits <= 0 || bits >= 1 << (checkboxCats.length + 1) - 1;
-  if (!bits || edgeChecks) return checkboxes;
+  if (!bits || bits <= 0 || bits >= (1 << checkboxCats.length) - 1) {
+    return { ignore: true };
+  }
 
-  checkboxes.ignore = false; // if edgeChecks is true, either all or no checkboxes are checked
+  // cannot ignore since non of the above conditions were met, user has selected checkboxes
+  const checkboxes = { ignore: false };
   checkboxCats.forEach((check, idx) => {
     /* eslint-disable-next-line no-bitwise */
     checkboxes[check] = bits & (1 << idx);
@@ -56,7 +57,7 @@ function parseCheckboxes(query) {
 }
 
 /**
- * Checks whether a course is allowed by the checkboxes specified by the user
+ * Checks whether a course is allowed by the checkbox selected by the user
  * @function  checkboxAllowed
  * @param     {Object.<string, string>} course
  *    a course from the dataset, including the 'Topic' attribute
@@ -78,6 +79,8 @@ function checkboxAllowed(course, checkboxes) {
 
 /**
  * Computes an embedding object from the categories returned by IBM watson.
+ * The embedding object is calculated by splitting each sub-category into a new label.
+ * The scores for each sub-category are multiplied by a decay factor.
  * @function  getEmbeddings
  * @param     {Array.<Object>}  cats
  *    The category results returned by IBM Watson's NLU analysis
@@ -91,14 +94,23 @@ function getEmbeddings(cats) {
     embeddings[cat] = 0.0;
   });
 
+  if (!cats) return embeddings;
+
   // then populate embedding object with max scores from the IBM watson categories
   cats.forEach((cat) => {
-    cat.label
+    const parts = cat.label
       .slice(1) // remove first / from the cats
-      .split('/')
-      .forEach((label) => {
-        // use the maximum confidence score for each embedding label
-        embeddings[label] = Math.max(embeddings[label], cat.score);
+      .split('/');
+
+    parts
+      .forEach((label, index) => {
+        /* use the maximum confidence score for each embedding label
+           however, the score has more ephasis on the higher level labels.
+        */
+        embeddings[label] = Math.max(
+          embeddings[label],
+          cat.score * config.get('decay_factor') ** (parts.length - index - 1),
+        );
       });
   });
   return embeddings;
@@ -108,28 +120,19 @@ function getEmbeddings(cats) {
  * Compares the categories between the user and a course, producing a Mean Squared Error value
  * - MSE(𝚨, 𝚩) = 1/n * 𝛴 (𝚨_i - 𝚩_i)²
  * @function  MSE
- * @param     {Array.<Object>}  userCats
- *    The category results returned by IBM Watson's NLU analysis of the user's input
- * @param     {Array.<Object>}  courseCats
- *    The category results returned by IBM Watson's NLU analysis of a course's information
+ * @param     {Array.<Object>}  userEmbs
+ *    An embedding object created from the categories produced by IBM Watson's NLU
+ * @param     {Array.<Object>}  courseEmbs
+ *    An embedding object created from the course's information produced by IBM Watson's NLU
  * @returns   {number}
  *    the MSE value computed from the embeddings of the categories
  */
-function MSE(userCats, courseCats) {
-  const userCatsEmb = getEmbeddings(userCats);
-  const courseEmb = getEmbeddings(courseCats);
-
-  /*
-  const acc = embeddingCats
-    .map((cat) => (userCatsEmb[cat] - courseEmb[cat]) ** 2)
-    .reduce((x, y) => x + y);
-  */
-
+function MSE(userEmbs, courseEmbs) {
   let acc = 0;
   embeddingCats.forEach((cat) => {
-    acc += (userCatsEmb[cat] - courseEmb[cat]) ** 2;
+    acc += (userEmbs[cat] - courseEmbs[cat]) ** 2; // squared error
   });
-  return acc / embeddingCats.length;
+  return acc / embeddingCats.length; // mean of squared errors
 }
 
 /**
@@ -141,10 +144,11 @@ function MSE(userCats, courseCats) {
  *    the IBM SkillsBuild course dataset in order of relevance to the user's input
  */
 function embeddingSort(userCats, checkboxes) {
+  const userEmbs = getEmbeddings(userCats);
   return dataset
     .filter((course) => checkboxAllowed(course, checkboxes))
     .map((course) => ({
-      mse: MSE(userCats, course.categories), // computing MSE value for each course
+      mse: MSE(userEmbs, getEmbeddings(course.categories)), // computing MSE value for each course
       course: course.input,
     }))
     .sort((a, b) => a.mse - b.mse)
@@ -175,8 +179,8 @@ router.get('/search', async (req, res) => {
       },
     },
   };
-  // default language as en-gb if too little text
-  if (params.text.length < MIN_TEXT_LENGTH) {
+  // default language as en-gb if too little text, (to avoid language id error)
+  if (params.text.length < config.get('min_text_length')) {
     params.language = 'en-gb';
   }
 
@@ -189,8 +193,14 @@ router.get('/search', async (req, res) => {
 
     const offset = parseOffset(req.query.offset);
     const checkboxes = parseCheckboxes(req.query.checkboxes);
-    const searchResults = embeddingSort(result.result.categories, checkboxes)
-      .slice(offset, offset + DEFAULT_LENGTH); // if offset=0, returns top ${DEFAULT_LENGTH} courses
+
+    let allowedCats = result.result.categories.filter((cat) => cat.score > 0.8);
+    if (!allowedCats.length) allowedCats = result.result.categories;
+
+    const sortedDataset = embeddingSort(allowedCats, checkboxes);
+    const searchResults = sortedDataset.slice(offset, offset + config.get('default_length'));
+    // if offset=0, returns top ${default_length} courses
+
     res.status(200).json(searchResults);
   }).catch((error) => {
     /* eslint-disable-next-line no-console */
@@ -214,12 +224,17 @@ const stt = new STT({
   serviceUrl: process.env.STT_API_URL,
 });
 
+/*  using the npm multer package, the frontend can send audio files to the backend
+    for IBM Watson Speech To Text transcription.
+*/
 const upload = multer({ storage: multer.memoryStorage() });
 router.post('/stt', upload.single('audio'), async (req, res) => {
+  // stt.recognize performs a call to a STT model in IBM cloud
   stt.recognize({
-    audio: req.file.buffer,
+    audio: req.file.buffer, // contains the audio data transmitted
     contentType: req.file.mimetype,
-    model: 'en-GB_Telephony',
+    model: 'en-GB_Multimedia', // 'en-GB_Telephony',
+    // next-gen STT model, some deprecated models include: Narrowband, BroadBand
   }).then((result) => {
     if (!result.result || !result.result.results) {
       res.status(400).json({ error: 'An error occured! Cannot transcribe speech', code: 1 });
@@ -231,7 +246,8 @@ router.post('/stt', upload.single('audio'), async (req, res) => {
     } else if (!finalText[0].alternatives.length) {
       res.status(400).json({ error: 'An error occured! Cannot transcribe speech', code: 1 });
     }
-    // return the transcribed speech back to the frontend
+
+    // return the transcribed speech back to the frontend, with the highest confidence
     res.status(200).json({
       transcript: finalText[0].alternatives[0].transcript,
     });
@@ -242,6 +258,7 @@ router.post('/stt', upload.single('audio'), async (req, res) => {
   });
 });
 
+// functions are exported for testing purposes
 module.exports = {
   router,
   MSE,

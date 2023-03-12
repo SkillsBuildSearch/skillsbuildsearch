@@ -38,7 +38,8 @@ function timeout(ms) {
  *  A piece of text generated from the course object, representing the course
  */
 function getAnalysisText(course) {
-  return `${course.Title} ${course.Topic} ${course.Description_Short}`;
+  // return `${course.Title} ${course.Topic} ${course.Description_short}`;
+  return `${course.Description_short}`; // this prompt seems to produce the most accurate IBM watson categories
 }
 
 /**
@@ -81,28 +82,32 @@ function processResults(course, result) {
  */
 async function processCourse(course, idx) {
   await timeout(idx * 350);
-  nlu.analyze({
-    text: getAnalysisText(course),
-    features: {
-      categories: {
-        limit: 20,
+  try {
+    const result = await nlu.analyze({
+      text: getAnalysisText(course),
+      features: {
+        categories: {
+          limit: 20,
+        },
       },
-    },
-  }).then((result) => {
-    /* eslint-disable-next-line no-console */
+    });
+    /* eslint-disable no-console */
+    if (result.status !== 200) {
+      console.error(`ERROR ${result}`);
+      process.exit(1);
+    }
+
     console.log(`Processing ${course.Title}`);
     processResults(course, result);
-  }).catch((error) => {
+  } catch (error) {
     if (error.headers) { // IBM watson error, possible API key issue
       const body = JSON.parse(error.body);
-      /* eslint-disable-next-line no-console */
       console.error(`ERROR ${error.message}\n${body.errorCode}: ${body.errorMessage}`);
     } else { // possible API url issue
-      /* eslint-disable-next-line no-console */
       console.error(`ERROR ${error}`);
     }
     process.exit(1);
-  });
+  } /* eslint-enable no-console */
 }
 
 /**
@@ -121,8 +126,8 @@ async function processDataset(path, dst) {
     .map(processCourse)) // process each course from the dataset
     .then(() => {
       // write compiled data to disk
-      fs.writeFileSync(`${dst}/checkbox_categories.json`, JSON.stringify([...checkboxCats], null, 2));
-      fs.writeFileSync(`${dst}/embedding_categories.json`, JSON.stringify([...embeddingCats], null, 2));
+      fs.writeFileSync(`${dst}/checkbox_categories.json`, JSON.stringify([...checkboxCats].sort(), null, 2));
+      fs.writeFileSync(`${dst}/embedding_categories.json`, JSON.stringify([...embeddingCats].sort(), null, 2));
       fs.writeFileSync(`${dst}/dataset_with_categories.json`, JSON.stringify(datasetWithCats, null, 2));
       /* eslint-disable-next-line no-console */
       console.log('Data saved to disk.');

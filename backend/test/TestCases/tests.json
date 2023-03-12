@@ -1,0 +1,202 @@
+{
+    "exampleCourses": [
+        {
+            "input": {
+              "Title": "Getting Started with Enterprise-grade AI",
+              "Description_short": "This course covers the foundations of Artificial Intelligence for business, including the following topics: AI Evolution, AI Industry Adoption Trends, Natural Language Processing and Virtual Agents.",
+              "Link": "https://www.ibm.com/academic/topic/artificial-intelligence?ach_id=256c0f15-a1f2-4b9e-b672-63f4d8b20018",
+              "Topic": "Artificial Intelligence, Capstone"
+            },
+            "categories": [
+              {
+                "score": 0.99996,
+                "label": "/technology & computing/artificial intelligence"
+              }
+            ]
+        },
+        {
+            "input": {
+              "Title": "Overview of IBM Cognos Analytics",
+              "Description_short": "This course provides participants with a high level overview of the IBM Cognos Analytics suite of products and their underlying architecture. They will examine each component as it relates to an Analytics solution. Participants will be shown a range of resources to provide additional information.",
+              "Link": "https://www.ibm.com/academic/topic/data-science?ach_id=fcce46b0-df00-4abc-9b02-cefc3c52ef08",
+              "Topic": "Data Science"
+            },
+            "categories": [
+              {
+                "score": 0.974827,
+                "label": "/technology & computing/computing/internet/cloud computing"
+              },
+              {
+                "score": 0.968045,
+                "label": "/technology & computing/computing/data storage and warehousing"
+              },
+              {
+                "score": 0.773676,
+                "label": "/technology & computing/computing/computer software and applications"
+              },
+              {
+                "score": 0.688154,
+                "label": "/science"
+              }
+            ]
+        },
+        {
+            "input": {
+              "Title": "Fundamentals of IBM Process Mining",
+              "Description_short": "Fundamentals of IBM process mining is a collection of courses that introduces students to process mining and how it is used to perform process and data analysis. Students will learn how to evaluate a process for potential candidates for Robotic Process Automation implementation. Students will also learn advanced data preparation, transformation concepts, and how to evaluate a multi-level process for maverick buying patterns. Finally, students will learn how to create and visualize end-to-end processes that include all process activities involved along with various process paths.",
+              "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=fe69d706-50d9-4c99-86e7-b79a91c4eefe",
+              "Topic": "IBM Automation"
+            },
+            "categories": [
+              {
+                "score": 0.847474,
+                "label": "/technology & computing/computing/computer software and applications"
+              },
+              {
+                "score": 0.760017,
+                "label": "/technology & computing/computing/computer software and applications/operating systems"
+              },
+              {
+                "score": 0.653225,
+                "label": "/technology & computing/computing/computer software and applications/graphics software"
+              },
+              {
+                "score": 0.643732,
+                "label": "/technology & computing/computing/desktops"
+              },
+              {
+                "score": 0.599844,
+                "label": "/technology & computing/computing/data storage and warehousing"
+              },
+              {
+                "score": 0.582158,
+                "label": "/business and finance/industries/technology industry"
+              },
+              {
+                "score": 0.567246,
+                "label": "/technology & computing/consumer electronics/home entertainment systems"
+              }
+            ]
+        },
+        {
+            "input": {
+              "Title": "Cloud Native Bootcamp",
+              "Description_short": "Cloud is everywhere. Today, many companies want to migrate their applications on to cloud. For this migration to be done, the applications must be re-architected in a way that they fully utilize the advantages of the cloud.",
+              "Link": "https://www.ibm.com/academic/topic/cloud?ach_id=0a0ed707-058c-4bc0-b0bf-d3719d21153d",
+              "Topic": "IBM Cloud"
+            },
+            "categories": [
+              {
+                "score": 0.996938,
+                "label": "/technology & computing/computing/internet/cloud computing"
+              }
+            ]
+        },
+        {
+            "input": {
+              "Title": "Qiskit Textbook",
+              "Description_short": "Qiskit makes it easy to start learning quantum software to run on real quantum hardware. Teach your students with the same tools used by scientists and engineers worldwide to accelerate research towards practical applications for quantum computing",
+              "Link": "https://www.ibm.com/academic/topic/quantum-computing?ach_id=1b63f368-d46f-48d3-8221-75b7f9ec515d",
+              "Topic": "IBM Quantum"
+            },
+            "categories": [
+              {
+                "score": 0.999185,
+                "label": "/science/physics"
+              },
+              {
+                "score": 0.998123,
+                "label": "/technology & computing/computing"
+              }
+            ]
+        }
+    ],
+    "exampleCheckboxes": {
+        "ignore": {
+            "ignore": true
+        },
+        "0": {
+            "Artificial Intelligence": 0,
+            "Capstone": 0,
+            "Data Science": 0,
+            "IBM Automation": 0,
+            "IBM Cloud": 0,
+            "IBM Engineering": 0,
+            "IBM Quantum": 0,
+            "IBM Security": 0,
+            "IBM Z": 0,
+            "Red Hat Academy": 0,
+            "ignore": true
+        },
+        "3": {
+            "Artificial Intelligence": 1,
+            "Capstone": 2,
+            "Data Science": 0,
+            "IBM Automation": 0,
+            "IBM Cloud": 0,
+            "IBM Engineering": 0,
+            "IBM Quantum": 0,
+            "IBM Security": 0,
+            "IBM Z": 0,
+            "Red Hat Academy": 0,
+            "ignore": false
+        },
+        "8": {
+            "Artificial Intelligence": 0,
+            "Capstone": 0,
+            "Data Science": 0,
+            "IBM Automation": 8,
+            "IBM Cloud": 0,
+            "IBM Engineering": 0,
+            "IBM Quantum": 0,
+            "IBM Security": 0,
+            "IBM Z": 0,
+            "Red Hat Academy": 0,
+            "ignore": false
+        },
+        "156": {
+            "Artificial Intelligence": 0,
+            "Capstone": 0,
+            "Data Science": 4,
+            "IBM Automation": 8,
+            "IBM Cloud": 16,
+            "IBM Engineering": 0,
+            "IBM Quantum": 0,
+            "IBM Security": 128,
+            "IBM Z": 0,
+            "Red Hat Academy": 0,
+            "ignore": false
+        },
+        "1022": {
+            "Artificial Intelligence": 0,
+            "Capstone": 2,
+            "Data Science": 4,
+            "IBM Automation": 8,
+            "IBM Cloud": 16,
+            "IBM Engineering": 32,
+            "IBM Quantum": 64,
+            "IBM Security": 128,
+            "IBM Z": 256,
+            "Red Hat Academy": 512,
+            "ignore": false
+        },
+        "1023": {
+            "ignore": true
+        }
+    },
+
+    "exampleUserEmbs": [
+        [
+            {
+                "score": 0.974827,
+                "label": "/technology & computing/computing/internet/cloud computing"
+            }
+        ],
+        [
+            {
+                "score": 0.99996,
+                "label": "/technology & computing/artificial intelligence"
+            }
+        ]
+    ]
+}
