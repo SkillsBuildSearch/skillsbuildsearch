@@ -1,23 +1,31 @@
 {
-  "name": "express-api-starter",
-  "version": "1.2.0",
-  "description": "A basic starter for an express.js API",
+  "name": "skillsbuildsearch",
+  "version": "1.0.0",
+  "description": "SkillsBuildSearch is a search tool using IBM Watson to provide users with accurate and relevant SkillsBuild courses, given a user's HE descriptions.",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "lint": "eslint --fix src",
-    "test": "jest",
+    "test": "set NODE_ENV=development&& jest",
     "prebuild": "node src/prebuild"
   },
   "keywords": [],
-  "author": "CJ R. <cj@null.computer> (https://w3cj.now.sh)",
+  "contributors": [
+    {"name": "Samuel Barnett"},
+    {"name": "William Gould"},
+    {"name": "Sang M Lee"},
+    {"name": "Andrew Oliver"},
+    {"name": "Theo Osborn"},
+    {"name": "Toby T Watkinson"}
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/w3cj/express-api-starter.git"
+    "url": "https://github.com/theoosborn/skillsbuildsearch.git"
   },
   "license": "MIT",
   "dependencies": {
+    "config": "^3.3.9",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
