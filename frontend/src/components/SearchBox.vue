@@ -45,7 +45,7 @@ export default {
       isRecording: false,
     };
   },
-  emits: ["voice", "search", "error"],
+  emits: ["search", "error"],
   methods: {
     submit() {
       if (this.searchText.length > 12) {
