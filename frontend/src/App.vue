@@ -82,9 +82,8 @@ export default {
       if (Object.entries(this.categories).length == 0) {
         this.loadCategories();
       }
-
       let uri = `${
-        import.meta.env.MODE
+        import.meta.env.VITE_APP_SERVER_ADDRESS
       }/api/v1/search?text=${encodeURIComponent(text)}`;
 
       if (offset) {
@@ -133,7 +132,7 @@ export default {
     },
     loadCategories() {
       const categoryRequest = new Request(
-        `${import.meta.env.MODE}/api/v1/categories/`
+        `${import.meta.env.VITE_APP_SERVER_ADDRESS}/api/v1/categories/`
       );
 
       fetch(categoryRequest)

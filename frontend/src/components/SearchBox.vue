@@ -92,7 +92,10 @@ export default {
           method: "POST",
           body: formData,
         };
-        fetch(`${import.meta.env.MODE}/api/v1/stt`, postRequest)
+        fetch(
+          `${import.meta.env.VITE_APP_SERVER_ADDRESS}/api/v1/stt`,
+          postRequest
+        )
           .then((response) => {
             response.json().then((data) => {
               this.searchText = data.transcript;
