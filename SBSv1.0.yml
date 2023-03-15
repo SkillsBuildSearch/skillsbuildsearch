@@ -18,8 +18,15 @@ paths:
             minLength: 12
         - name: offset
           in: query
-          required: true
+          required: false
           description: Course offsets
+          schema:
+            type: integer
+            minimum: 0
+        - name: checkboxes
+          in: query
+          required: true
+          description: Numerial representation of course categories selection
           schema:
             type: integer
             minimum: 0
