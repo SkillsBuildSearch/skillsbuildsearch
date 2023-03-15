@@ -1,9 +1,10 @@
 openapi: '3.0.2'
 info:
-  title: SBS
+  title: SkillsBuildSearch
+  description: An AI IBM SkillsBuild search tool
   version: '1.0.0'
 servers:
-  - url: http://localhost:5001
+  - url: https://squareearth.net
 paths:
   /api/v1/search:
     get:
@@ -18,7 +19,7 @@ paths:
         - name: offset
           in: query
           required: true
-          description: Course offsets 
+          description: Course offsets
           schema:
             type: integer
             minimum: 0
