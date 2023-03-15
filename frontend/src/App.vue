@@ -84,7 +84,7 @@ export default {
       }
 
       let uri = `${
-        process.env.VUE_APP_SERVER_ADDRESS
+        import.meta.env.MODE
       }/api/v1/search?text=${encodeURIComponent(text)}`;
 
       if (offset) {
@@ -133,7 +133,7 @@ export default {
     },
     loadCategories() {
       const categoryRequest = new Request(
-        `${process.env.VUE_APP_SERVER_ADDRESS}/api/v1/categories/`
+        `${import.meta.env.MODE}/api/v1/categories/`
       );
 
       fetch(categoryRequest)
