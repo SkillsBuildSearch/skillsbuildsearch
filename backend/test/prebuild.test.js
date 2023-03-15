@@ -4,29 +4,30 @@ const imports = require('../src/prebuild/prebuild');
 const dataset = JSON.parse(fs.readFileSync('data/dataset.json', 'utf8'));
 const embeddingCats = JSON.parse(fs.readFileSync('data/embedding_categories.json', 'utf8'));
 
-/*
-module.exports = {
-  timeout,
-  getAnalysisText,
-  processResults,
-  processCourse,
-  processDataset,
-};
-*/
 
-describe('GetAnalysisText', () => {
-  test('Correct course object', () => {
-    /* eslint-disable max-len */
-    // expect(imports.getAnalysisText(dataset[0])).toBe(`${dataset[0].Title} ${dataset[0].Topic} ${dataset[0].Description_short}`);
-    expect(imports.getAnalysisText(dataset[0])).toBe(`${dataset[0].Description_short}`);
+// Testing the getAnalysisText function
+describe('getAnalysisText - returns the text used for Watson analysis from a course object', () => {
+    test('Correct course object', () => {
+      expect(imports.getAnalysisText(dataset[0])).toBe(`${dataset[0].Description_short}`);
+    });
+    test('Object with no description should be detected', () => {
+      expect(imports.getAnalysisText({"Title": "Test", "Link": "localhost", "Topic": "Test"})).toBe(undefined);
+    });
+    test('[undefined]', () => {
+      expect(imports.getAnalysisText(undefined)).toBe(undefined);
+    });
+    test('Empty object', () => {
+      expect(imports.getAnalysisText({})).toBe(undefined);
+    });
+});
+
+// Testing the timeout function
+describe('timeout - delays api calls', () => {
+  test('It only fires once', () => {
+    expect.assertions(1);
+    return expect(imports.timeout(100)).resolves.toBe(undefined);
   });
-  test('["5"] should result in [5]', () => {
-    expect(imports.parseOffset('5')).toBe(5);
-  });
-  test('["100"] should result in [100]', () => {
-    expect(imports.parseOffset('100')).toBe(100);
-  });
-  test('["0"] should result in [0]', () => {
-    expect(imports.parseOffset('0')).toBe(0);
+  test('It should handle negative wait times', () => {
+    expect(imports.timeout(-100)).resolves;
   });
 });

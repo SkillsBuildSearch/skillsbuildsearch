@@ -1,18 +1,6 @@
 const fs = require('fs');
 const imports = require('../src/api/search');
 
-/*
-module.exports = {
-    router,
-    MSE, DONE
-    parseOffset, DONE
-    parseCheckboxes, DONE
-    checkboxAllowed, DONE
-    getEmbeddings, DONE
-    embeddingSort, DONE
-  };
-*/
-
 function loadData(path) {
   return JSON.parse(fs.readFileSync(path, 'utf-8'));
 }

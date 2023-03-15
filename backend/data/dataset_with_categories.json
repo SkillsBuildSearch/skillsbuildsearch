@@ -8,7 +8,7 @@
     },
     "categories": [
       {
-        "score": 0.99996,
+        "score": 1,
         "label": "/technology & computing/artificial intelligence"
       }
     ]
@@ -22,12 +22,16 @@
     },
     "categories": [
       {
-        "score": 0.999625,
-        "label": "/technology & computing/artificial intelligence"
+        "score": 0.999916,
+        "label": "/education"
       },
       {
-        "score": 0.960032,
-        "label": "/technology & computing/computing/data storage and warehousing"
+        "score": 0.955027,
+        "label": "/science"
+      },
+      {
+        "score": 0.945677,
+        "label": "/education/college education"
       }
     ]
   },
@@ -40,8 +44,20 @@
     },
     "categories": [
       {
-        "score": 0.999491,
+        "score": 0.998184,
         "label": "/technology & computing/artificial intelligence"
+      },
+      {
+        "score": 0.993007,
+        "label": "/education/language learning"
+      },
+      {
+        "score": 0.936319,
+        "label": "/technology & computing/computing/internet/cloud computing"
+      },
+      {
+        "score": 0.814952,
+        "label": "/education/online education"
       }
     ]
   },
@@ -54,8 +70,20 @@
     },
     "categories": [
       {
-        "score": 0.999987,
+        "score": 0.999701,
         "label": "/technology & computing/artificial intelligence"
+      },
+      {
+        "score": 0.98468,
+        "label": "/education"
+      },
+      {
+        "score": 0.959256,
+        "label": "/education/secondary education"
+      },
+      {
+        "score": 0.94418,
+        "label": "/education/primary education"
       }
     ]
   },
@@ -68,12 +96,16 @@
     },
     "categories": [
       {
-        "score": 0.9979,
+        "score": 0.992289,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.893072,
         "label": "/technology & computing/artificial intelligence"
       },
       {
-        "score": 0.948477,
-        "label": "/technology & computing/computing/data storage and warehousing"
+        "score": 0.866685,
+        "label": "/business and finance/business/business i.t."
       }
     ]
   },
@@ -86,8 +118,24 @@
     },
     "categories": [
       {
-        "score": 0.998004,
+        "score": 0.941479,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.892159,
         "label": "/technology & computing/artificial intelligence"
+      },
+      {
+        "score": 0.823275,
+        "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.761616,
+        "label": "/business and finance/business/business i.t."
+      },
+      {
+        "score": 0.656047,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
       }
     ]
   },
@@ -100,24 +148,24 @@
     },
     "categories": [
       {
-        "score": 0.987121,
+        "score": 0.995868,
         "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.971237,
+        "score": 0.995168,
+        "label": "/science"
+      },
+      {
+        "score": 0.987196,
         "label": "/science/environment"
       },
       {
-        "score": 0.955297,
+        "score": 0.975727,
         "label": "/television/science fiction tv"
       },
       {
-        "score": 0.712504,
+        "score": 0.826855,
         "label": "/education"
-      },
-      {
-        "score": 0.632955,
-        "label": "/education/college education"
       }
     ]
   },
@@ -126,28 +174,28 @@
       "Title": "Getting Started with Threat Intelligence and Hunting",
       "Description_short": "This is a foundational course, exposing the learner to threat intelligence concepts including: Attack trends by geography, threat intelligence tools and real-world use cases. Complete this course to get your badge.",
       "Link": "https://www.ibm.com/academic/topic/capstone?ach_id=3f13c64c-c7ca-45d8-bce1-f05711460f09",
-      "Topic": "Capstone"
+      "Topic": "Capstone, IBM Security"
     },
     "categories": [
       {
-        "score": 0.705334,
-        "label": "/news and politics/politics/war and conflicts"
+        "score": 0.961037,
+        "label": "/technology & computing/computing/information and network security"
       },
       {
-        "score": 0.70265,
+        "score": 0.879336,
         "label": "/technology & computing/artificial intelligence"
       },
       {
-        "score": 0.591031,
-        "label": "/pets/birds"
+        "score": 0.790602,
+        "label": "/education"
       },
       {
-        "score": 0.545473,
-        "label": "/pets/dogs"
+        "score": 0.782282,
+        "label": "/news and politics/politics/war and conflicts"
       },
       {
-        "score": 0.522375,
-        "label": "/education/adult education"
+        "score": 0.761153,
+        "label": "/education/language learning"
       }
     ]
   },
@@ -156,88 +204,16 @@
       "Title": "Getting Started with Cloud for the Enterprise",
       "Description_short": "This course covers the basic foundations of cloud for the enterprise including: Consumer applications, Enterprise adoption, Delivery models and Industry Cloud Adoption.",
       "Link": "https://www.ibm.com/academic/topic/capstone?ach_id=b9de26db-b689-4894-bcad-5aa28deec936",
-      "Topic": "Capstone"
+      "Topic": "Capstone, IBM Cloud"
     },
     "categories": [
       {
-        "score": 0.605727,
+        "score": 0.991296,
+        "label": "/family and relationships/parenting/adoption and fostering"
+      },
+      {
+        "score": 0.857874,
         "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.600364,
-        "label": "/business and finance/business/business administration"
-      },
-      {
-        "score": 0.599462,
-        "label": "/business and finance/business/government business"
-      },
-      {
-        "score": 0.597796,
-        "label": "/technology & computing/computing/programming languages"
-      },
-      {
-        "score": 0.590531,
-        "label": "/business and finance/business/business i.t."
-      },
-      {
-        "score": 0.565177,
-        "label": "/business and finance/business/large business"
-      },
-      {
-        "score": 0.552388,
-        "label": "/travel/travel type/business travel"
-      },
-      {
-        "score": 0.537327,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.535101,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.521377,
-        "label": "/business and finance/business/small and medium-sized business"
-      },
-      {
-        "score": 0.521151,
-        "label": "/business and finance/business/business utilities"
-      },
-      {
-        "score": 0.510858,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
-      },
-      {
-        "score": 0.506356,
-        "label": "/technology & computing/computing/computer software and applications/video software"
-      },
-      {
-        "score": 0.501721,
-        "label": "/video gaming/mobile games"
-      },
-      {
-        "score": 0.49834,
-        "label": "/careers/career planning"
-      },
-      {
-        "score": 0.496142,
-        "label": "/business and finance/industries"
-      },
-      {
-        "score": 0.480855,
-        "label": "/science/environment"
-      },
-      {
-        "score": 0.48054,
-        "label": "/education"
-      },
-      {
-        "score": 0.476708,
-        "label": "/education/online education"
-      },
-      {
-        "score": 0.473567,
-        "label": "/technology & computing/consumer electronics"
       }
     ]
   },
@@ -250,20 +226,20 @@
     },
     "categories": [
       {
-        "score": 0.770846,
+        "score": 0.790299,
         "label": "/technology & computing/computing/programming languages"
       },
       {
-        "score": 0.731077,
-        "label": "/technology & computing/computing/data storage and warehousing"
+        "score": 0.632845,
+        "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.684079,
+        "score": 0.614097,
         "label": "/technology & computing/computing/computer software and applications/databases"
       },
       {
-        "score": 0.578036,
-        "label": "/technology & computing/computing/information and network security"
+        "score": 0.580673,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
       }
     ]
   },
@@ -276,19 +252,27 @@
     },
     "categories": [
       {
-        "score": 0.974827,
+        "score": 0.967529,
         "label": "/technology & computing/computing/internet/cloud computing"
       },
       {
-        "score": 0.968045,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.773676,
+        "score": 0.819268,
         "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.688154,
+        "score": 0.779728,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.710571,
+        "label": "/technology & computing/computing/information and network security"
+      },
+      {
+        "score": 0.705688,
+        "label": "/education"
+      },
+      {
+        "score": 0.67039,
         "label": "/science"
       }
     ]
@@ -302,44 +286,32 @@
     },
     "categories": [
       {
-        "score": 0.856514,
-        "label": "/technology & computing/computing"
-      },
-      {
-        "score": 0.805106,
+        "score": 0.903709,
         "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.803585,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.769046,
-        "label": "/careers/career planning"
-      },
-      {
-        "score": 0.721614,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.641944,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.60651,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
-      },
-      {
-        "score": 0.576572,
-        "label": "/technology & computing/artificial intelligence"
-      },
-      {
-        "score": 0.568843,
+        "score": 0.802306,
         "label": "/hobbies & interests/model toys"
       },
       {
-        "score": 0.556397,
-        "label": "/technology & computing/computing/computer software and applications/video software"
+        "score": 0.753719,
+        "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.674126,
+        "label": "/education"
+      },
+      {
+        "score": 0.640553,
+        "label": "/education/online education"
+      },
+      {
+        "score": 0.602929,
+        "label": "/careers/career planning"
+      },
+      {
+        "score": 0.580676,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
       }
     ]
   },
@@ -352,16 +324,20 @@
     },
     "categories": [
       {
-        "score": 0.995993,
+        "score": 0.990334,
         "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.962747,
+        "score": 0.955464,
         "label": "/technology & computing/computing/internet/cloud computing"
       },
       {
-        "score": 0.806666,
+        "score": 0.80974,
         "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.673451,
+        "label": "/careers/career planning"
       }
     ]
   },
@@ -374,20 +350,48 @@
     },
     "categories": [
       {
-        "score": 0.925294,
+        "score": 0.886255,
         "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.809761,
+        "score": 0.805552,
         "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.733551,
+        "score": 0.798994,
+        "label": "/hobbies & interests/model toys"
+      },
+      {
+        "score": 0.717056,
         "label": "/technology & computing/computing/computer software and applications/operating systems"
       },
       {
-        "score": 0.630288,
+        "score": 0.714864,
+        "label": "/science"
+      },
+      {
+        "score": 0.65007,
         "label": "/automotive/auto body styles/sedan"
+      },
+      {
+        "score": 0.624843,
+        "label": "/technology & computing/artificial intelligence"
+      },
+      {
+        "score": 0.597187,
+        "label": "/technology & computing/computing/computer software and applications/graphics software"
+      },
+      {
+        "score": 0.557278,
+        "label": "/technology & computing/computing/information and network security"
+      },
+      {
+        "score": 0.547708,
+        "label": "/technology & computing/computing/computer software and applications/video software"
+      },
+      {
+        "score": 0.532679,
+        "label": "/technology & computing/computing/desktops"
       }
     ]
   },
@@ -400,32 +404,60 @@
     },
     "categories": [
       {
-        "score": 0.889078,
+        "score": 0.818856,
+        "label": "/technology & computing/computing/internet/cloud computing"
+      },
+      {
+        "score": 0.770463,
+        "label": "/education/online education"
+      },
+      {
+        "score": 0.703732,
         "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.761929,
-        "label": "/technology & computing/computing/computer software and applications"
+        "score": 0.703203,
+        "label": "/technology & computing/artificial intelligence"
       },
       {
-        "score": 0.673176,
-        "label": "/business and finance/business/business i.t."
-      },
-      {
-        "score": 0.632575,
+        "score": 0.690644,
         "label": "/science"
       },
       {
-        "score": 0.631227,
+        "score": 0.686662,
+        "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.652296,
+        "label": "/technology & computing/computing/information and network security"
+      },
+      {
+        "score": 0.559665,
+        "label": "/education/language learning"
+      },
+      {
+        "score": 0.553334,
+        "label": "/technology & computing/computing/internet/internet of things"
+      },
+      {
+        "score": 0.521678,
+        "label": "/technology & computing/computing/internet/it and internet support"
+      },
+      {
+        "score": 0.511826,
+        "label": "/books and literature/children's literature"
+      },
+      {
+        "score": 0.509828,
+        "label": "/education/educational assessment"
+      },
+      {
+        "score": 0.507568,
         "label": "/technology & computing/computing/computer software and applications/operating systems"
       },
       {
-        "score": 0.571666,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.560352,
-        "label": "/business and finance/business/business administration"
+        "score": 0.504192,
+        "label": "/technology & computing/computing/internet/web hosting"
       }
     ]
   },
@@ -438,20 +470,44 @@
     },
     "categories": [
       {
-        "score": 0.938373,
-        "label": "/technology & computing/computing/data storage and warehousing"
+        "score": 0.964592,
+        "label": "/education"
       },
       {
-        "score": 0.775109,
-        "label": "/technology & computing/computing/computer software and applications"
+        "score": 0.923789,
+        "label": "/education/online education"
       },
       {
-        "score": 0.71506,
+        "score": 0.901619,
+        "label": "/education/primary education"
+      },
+      {
+        "score": 0.847499,
         "label": "/science"
       },
       {
-        "score": 0.636544,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
+        "score": 0.805729,
+        "label": "/education/secondary education"
+      },
+      {
+        "score": 0.769862,
+        "label": "/education/special education"
+      },
+      {
+        "score": 0.736819,
+        "label": "/education/educational assessment"
+      },
+      {
+        "score": 0.721531,
+        "label": "/education/college education"
+      },
+      {
+        "score": 0.677227,
+        "label": "/education/adult education"
+      },
+      {
+        "score": 0.625457,
+        "label": "/science/environment"
       }
     ]
   },
@@ -464,12 +520,16 @@
     },
     "categories": [
       {
-        "score": 0.995778,
+        "score": 0.98658,
         "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.796749,
+        "score": 0.849786,
         "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.690557,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
       }
     ]
   },
@@ -482,28 +542,24 @@
     },
     "categories": [
       {
-        "score": 0.906983,
-        "label": "/technology & computing/computing/data storage and warehousing"
+        "score": 0.953298,
+        "label": "/technology & computing/computing/internet/cloud computing"
       },
       {
-        "score": 0.785124,
+        "score": 0.850891,
         "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.660871,
-        "label": "/business and finance/business/business i.t."
+        "score": 0.728835,
+        "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.660022,
+        "score": 0.705622,
         "label": "/technology & computing/computing/computer software and applications/operating systems"
       },
       {
-        "score": 0.585625,
+        "score": 0.641147,
         "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.58385,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
       }
     ]
   },
@@ -516,36 +572,24 @@
     },
     "categories": [
       {
-        "score": 0.925821,
-        "label": "/business and finance/industries/education industry"
-      },
-      {
-        "score": 0.912839,
+        "score": 0.975528,
         "label": "/education"
       },
       {
-        "score": 0.910231,
+        "score": 0.935746,
         "label": "/education/language learning"
       },
       {
-        "score": 0.825684,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.783492,
-        "label": "/technology & computing/artificial intelligence"
-      },
-      {
-        "score": 0.728439,
+        "score": 0.847652,
         "label": "/education/online education"
       },
       {
-        "score": 0.702169,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
+        "score": 0.795121,
+        "label": "/technology & computing/artificial intelligence"
       },
       {
-        "score": 0.601319,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
+        "score": 0.788948,
+        "label": "/technology & computing/computing/computer software and applications"
       }
     ]
   },
@@ -558,155 +602,71 @@
     },
     "categories": [
       {
-        "score": 0.856652,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.776806,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.661338,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
-      },
-      {
-        "score": 0.635302,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.618643,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.600004,
-        "label": "/hobbies & interests/collecting"
-      },
-      {
-        "score": 0.587401,
-        "label": "/business and finance/industries/technology industry"
-      },
-      {
-        "score": 0.563791,
-        "label": "/business and finance/industries/manufacturing industry"
-      }
-    ]
-  },
-  {
-    "input": {
-      "Title": "IBM Robotic Process Automation - Basic I",
-      "Description_short": "This is an introductory course to IBM Robotic Process Automation. In this course, students will learn the basics of inserting commands, publishing scripts, controlling the flow of scripts, and many other RPA essentials. This course provides students with the opportunity to learn and sharpen the basic skills needed to successfully learn IBM’s Robotic Process Automation.",
-      "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=eadb3ad7-335b-4152-b7b9-28ac8439844d",
-      "Topic": "IBM Automation"
-    },
-    "categories": [
-      {
-        "score": 0.602116,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.584942,
-        "label": "/business and finance/industries/manufacturing industry"
-      },
-      {
-        "score": 0.579175,
-        "label": "/business and finance/industries/technology industry"
-      },
-      {
-        "score": 0.575115,
+        "score": 0.885375,
         "label": "/business and finance/business/business i.t."
       },
       {
-        "score": 0.568011,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
+        "score": 0.836605,
+        "label": "/technology & computing/computing"
       },
       {
-        "score": 0.547049,
-        "label": "/technology & computing/computing/computer software and applications/video software"
-      },
-      {
-        "score": 0.543956,
-        "label": "/technology & computing/artificial intelligence"
-      },
-      {
-        "score": 0.537337,
-        "label": "/business and finance/business/business accounting & finance"
-      },
-      {
-        "score": 0.53354,
-        "label": "/business and finance/industries/financial industry"
-      },
-      {
-        "score": 0.530854,
-        "label": "/business and finance/business/government business"
-      },
-      {
-        "score": 0.515905,
-        "label": "/automotive/auto technology/auto safety technologies"
-      },
-      {
-        "score": 0.509049,
-        "label": "/business and finance/business/startups"
-      },
-      {
-        "score": 0.508954,
-        "label": "/business and finance/business/business administration"
-      }
-    ]
-  },
-  {
-    "input": {
-      "Title": "Overview of Process Mining",
-      "Description_short": "This course introduces students to IBM Process Mining. Students will learn the differences between process mining and task mining, the different phases of process mining, use cases, and how process mining is performed. Students will also learn how to use IBM Process Mining to import data sources, map data, and how to visualize a process, along with the introduction to other major features of process mining.",
-      "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=d4536c1f-3c0c-4350-b675-0b7f29820ae0",
-      "Topic": "IBM Automation"
-    },
-    "categories": [
-      {
-        "score": 0.823052,
+        "score": 0.831937,
         "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.728522,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.638749,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
-      },
-      {
-        "score": 0.623589,
-        "label": "/business and finance/industries"
-      },
-      {
-        "score": 0.603785,
-        "label": "/business and finance/industries/technology industry"
-      },
-      {
-        "score": 0.588544,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.58743,
+        "score": 0.752574,
         "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.58653,
-        "label": "/business and finance/industries/manufacturing industry"
+        "score": 0.718411,
+        "label": "/business and finance/business/government business"
       },
       {
-        "score": 0.581686,
+        "score": 0.714343,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.705479,
+        "label": "/business and finance/business/small and medium-sized business"
+      },
+      {
+        "score": 0.628058,
+        "label": "/business and finance/industries/technology industry"
+      },
+      {
+        "score": 0.625406,
+        "label": "/business and finance/business/large business"
+      },
+      {
+        "score": 0.623304,
         "label": "/technology & computing/artificial intelligence"
       },
       {
-        "score": 0.577597,
-        "label": "/technology & computing/consumer electronics/home entertainment systems"
+        "score": 0.591494,
+        "label": "/business and finance/industries/manufacturing industry"
       },
       {
-        "score": 0.570534,
-        "label": "/technology & computing/computing/programming languages"
+        "score": 0.585283,
+        "label": "/business and finance/industries/information services industry"
       },
       {
-        "score": 0.567554,
+        "score": 0.573714,
+        "label": "/technology & computing/computing/information and network security"
+      },
+      {
+        "score": 0.564608,
+        "label": "/technology & computing/computing/computer software and applications/graphics software"
+      },
+      {
+        "score": 0.544751,
+        "label": "/education/online education"
+      },
+      {
+        "score": 0.511923,
+        "label": "/careers/career planning"
+      },
+      {
+        "score": 0.481691,
         "label": "/technology & computing/computing/computer software and applications/video software"
       }
     ]
@@ -720,56 +680,176 @@
     },
     "categories": [
       {
-        "score": 0.602783,
+        "score": 0.628985,
         "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.58473,
-        "label": "/business and finance/industries/manufacturing industry"
-      },
-      {
-        "score": 0.579131,
-        "label": "/business and finance/industries/technology industry"
-      },
-      {
-        "score": 0.574816,
-        "label": "/business and finance/business/business i.t."
-      },
-      {
-        "score": 0.569178,
+        "score": 0.581584,
         "label": "/technology & computing/computing/computer software and applications/graphics software"
       },
       {
-        "score": 0.547167,
-        "label": "/technology & computing/computing/computer software and applications/video software"
+        "score": 0.57238,
+        "label": "/business and finance/industries/manufacturing industry"
       },
       {
-        "score": 0.543856,
+        "score": 0.572206,
+        "label": "/business and finance/industries/technology industry"
+      },
+      {
+        "score": 0.561259,
         "label": "/technology & computing/artificial intelligence"
       },
       {
-        "score": 0.53687,
-        "label": "/business and finance/business/business accounting & finance"
+        "score": 0.550475,
+        "label": "/technology & computing/computing/computer software and applications/video software"
       },
       {
-        "score": 0.533354,
+        "score": 0.544403,
         "label": "/business and finance/industries/financial industry"
       },
       {
-        "score": 0.531306,
+        "score": 0.536564,
+        "label": "/education/online education"
+      },
+      {
+        "score": 0.505036,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.504277,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.503529,
+        "label": "/business and finance/industries/education industry"
+      },
+      {
+        "score": 0.50349,
+        "label": "/automotive/auto technology/auto safety technologies"
+      }
+    ]
+  },
+  {
+    "input": {
+      "Title": "IBM Robotic Process Automation - Basic I",
+      "Description_short": "This is an introductory course to IBM Robotic Process Automation. In this course, students will learn the basics of inserting commands, publishing scripts, controlling the flow of scripts, and many other RPA essentials. This course provides students with the opportunity to learn and sharpen the basic skills needed to successfully learn IBM’s Robotic Process Automation.",
+      "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=eadb3ad7-335b-4152-b7b9-28ac8439844d",
+      "Topic": "IBM Automation"
+    },
+    "categories": [
+      {
+        "score": 0.586256,
+        "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.576549,
+        "label": "/business and finance/industries/manufacturing industry"
+      },
+      {
+        "score": 0.57124,
+        "label": "/business and finance/industries/technology industry"
+      },
+      {
+        "score": 0.569267,
+        "label": "/business and finance/business/business i.t."
+      },
+      {
+        "score": 0.557514,
+        "label": "/technology & computing/computing/computer software and applications/graphics software"
+      },
+      {
+        "score": 0.543887,
+        "label": "/technology & computing/artificial intelligence"
+      },
+      {
+        "score": 0.541046,
+        "label": "/technology & computing/computing/computer software and applications/video software"
+      },
+      {
+        "score": 0.539297,
+        "label": "/business and finance/industries/financial industry"
+      },
+      {
+        "score": 0.535339,
+        "label": "/business and finance/business/business accounting & finance"
+      },
+      {
+        "score": 0.527257,
         "label": "/business and finance/business/government business"
       },
       {
-        "score": 0.515594,
+        "score": 0.526057,
+        "label": "/education/online education"
+      },
+      {
+        "score": 0.512479,
+        "label": "/business and finance/business/business administration"
+      },
+      {
+        "score": 0.512113,
         "label": "/automotive/auto technology/auto safety technologies"
       },
       {
-        "score": 0.50891,
+        "score": 0.508874,
         "label": "/business and finance/business/startups"
       },
       {
-        "score": 0.508577,
-        "label": "/business and finance/business/business administration"
+        "score": 0.499907,
+        "label": "/technology & computing/computing/computer software and applications/photo editing software"
+      },
+      {
+        "score": 0.499342,
+        "label": "/technology & computing/robotics"
+      }
+    ]
+  },
+  {
+    "input": {
+      "Title": "Overview of Process Mining",
+      "Description_short": "This course introduces students to IBM Process Mining. Students will learn the differences between process mining and task mining, the different phases of process mining, use cases, and how process mining is performed. Students will also learn how to use IBM Process Mining to import data sources, map data, and how to visualize a process, along with the introduction to other major features of process mining.",
+      "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=d4536c1f-3c0c-4350-b675-0b7f29820ae0",
+      "Topic": "IBM Automation"
+    },
+    "categories": [
+      {
+        "score": 0.953135,
+        "label": "/education"
+      },
+      {
+        "score": 0.830775,
+        "label": "/education/online education"
+      },
+      {
+        "score": 0.81423,
+        "label": "/technology & computing/computing"
+      },
+      {
+        "score": 0.796503,
+        "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.748935,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.7466,
+        "label": "/education/primary education"
+      },
+      {
+        "score": 0.724862,
+        "label": "/education/educational assessment"
+      },
+      {
+        "score": 0.709671,
+        "label": "/education/secondary education"
+      },
+      {
+        "score": 0.67837,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.677433,
+        "label": "/science"
       }
     ]
   },
@@ -782,32 +862,84 @@
     },
     "categories": [
       {
-        "score": 0.847474,
+        "score": 0.613575,
+        "label": "/business and finance/business/business i.t."
+      },
+      {
+        "score": 0.610142,
         "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.760017,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.653225,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
-      },
-      {
-        "score": 0.643732,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.599844,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.582158,
+        "score": 0.590349,
         "label": "/business and finance/industries/technology industry"
       },
       {
-        "score": 0.567246,
-        "label": "/technology & computing/consumer electronics/home entertainment systems"
+        "score": 0.581723,
+        "label": "/business and finance/industries/manufacturing industry"
+      },
+      {
+        "score": 0.575323,
+        "label": "/education"
+      },
+      {
+        "score": 0.568126,
+        "label": "/technology & computing/artificial intelligence"
+      },
+      {
+        "score": 0.565631,
+        "label": "/education/online education"
+      },
+      {
+        "score": 0.549743,
+        "label": "/business and finance/industries/education industry"
+      },
+      {
+        "score": 0.545463,
+        "label": "/technology & computing/computing/computer software and applications/graphics software"
+      },
+      {
+        "score": 0.540165,
+        "label": "/business and finance/industries/financial industry"
+      },
+      {
+        "score": 0.533204,
+        "label": "/education/educational assessment"
+      },
+      {
+        "score": 0.524949,
+        "label": "/technology & computing/computing/computer software and applications/video software"
+      },
+      {
+        "score": 0.52059,
+        "label": "/business and finance/business/government business"
+      },
+      {
+        "score": 0.518485,
+        "label": "/business and finance/business/business accounting & finance"
+      },
+      {
+        "score": 0.512771,
+        "label": "/business and finance/business/business administration"
+      },
+      {
+        "score": 0.507473,
+        "label": "/science"
+      },
+      {
+        "score": 0.499898,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.492806,
+        "label": "/education/primary education"
+      },
+      {
+        "score": 0.492068,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.491908,
+        "label": "/education/college education"
       }
     ]
   },
@@ -820,32 +952,36 @@
     },
     "categories": [
       {
-        "score": 0.751775,
-        "label": "/technology & computing/computing"
-      },
-      {
-        "score": 0.743943,
+        "score": 0.876654,
         "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.671667,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.619148,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.613084,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.594501,
+        "score": 0.665723,
         "label": "/technology & computing/computing/computer software and applications/graphics software"
       },
       {
-        "score": 0.550022,
+        "score": 0.648936,
+        "label": "/business and finance/business/business i.t."
+      },
+      {
+        "score": 0.639848,
+        "label": "/education/online education"
+      },
+      {
+        "score": 0.633161,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.620525,
         "label": "/technology & computing/computing/computer software and applications/video software"
+      },
+      {
+        "score": 0.606987,
+        "label": "/business and finance/industries/information services industry"
+      },
+      {
+        "score": 0.570859,
+        "label": "/business and finance/industries/technology industry"
       }
     ]
   },
@@ -858,39 +994,35 @@
     },
     "categories": [
       {
-        "score": 0.820126,
+        "score": 0.910484,
         "label": "/technology & computing/computing"
       },
       {
-        "score": 0.780377,
+        "score": 0.886878,
         "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.70582,
+        "score": 0.780995,
         "label": "/technology & computing/computing/computer software and applications/operating systems"
       },
       {
-        "score": 0.629425,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
+        "score": 0.718723,
+        "label": "/education/online education"
       },
       {
-        "score": 0.622928,
+        "score": 0.652719,
         "label": "/technology & computing/computing/desktops"
       },
       {
-        "score": 0.605702,
+        "score": 0.644873,
         "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.588789,
-        "label": "/video gaming/pc games"
+        "score": 0.626077,
+        "label": "/technology & computing/computing/computer software and applications/graphics software"
       },
       {
-        "score": 0.586752,
-        "label": "/technology & computing/computing/programming languages"
-      },
-      {
-        "score": 0.560536,
+        "score": 0.61488,
         "label": "/technology & computing/artificial intelligence"
       }
     ]
@@ -904,32 +1036,8 @@
     },
     "categories": [
       {
-        "score": 0.844871,
-        "label": "/technology & computing/computing"
-      },
-      {
-        "score": 0.831449,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.760973,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.695337,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.660834,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.648076,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
-      },
-      {
-        "score": 0.585817,
-        "label": "/technology & computing/computing/computer peripherals"
+        "score": 0.999993,
+        "label": "/technology & computing/computing/internet/cloud computing"
       }
     ]
   },
@@ -942,8 +1050,8 @@
     },
     "categories": [
       {
-        "score": 0.996938,
-        "label": "/technology & computing/computing/internet/cloud computing"
+        "score": 0.997367,
+        "label": "/technology & computing/computing/computer software and applications"
       }
     ]
   },
@@ -956,32 +1064,8 @@
     },
     "categories": [
       {
-        "score": 0.867044,
-        "label": "/technology & computing/computing"
-      },
-      {
-        "score": 0.862799,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.804885,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.736311,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.68833,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
-      },
-      {
-        "score": 0.678676,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.603821,
-        "label": "/technology & computing/computing/computer peripherals"
+        "score": 0.992595,
+        "label": "/technology & computing/computing/internet/cloud computing"
       }
     ]
   },
@@ -994,16 +1078,12 @@
     },
     "categories": [
       {
-        "score": 0.992894,
+        "score": 0.99814,
         "label": "/business and finance/industries/civil engineering industry"
       },
       {
-        "score": 0.977444,
+        "score": 0.992169,
         "label": "/business and finance/industries/mechanical and industrial engineering industry"
-      },
-      {
-        "score": 0.873147,
-        "label": "/technology & computing/computing"
       }
     ]
   },
@@ -1016,8 +1096,12 @@
     },
     "categories": [
       {
-        "score": 0.99933,
+        "score": 0.998927,
         "label": "/technology & computing/computing/information and network security"
+      },
+      {
+        "score": 0.989945,
+        "label": "/education"
       }
     ]
   },
@@ -1030,8 +1114,24 @@
     },
     "categories": [
       {
-        "score": 0.982766,
+        "score": 0.964426,
         "label": "/technology & computing/computing/information and network security"
+      },
+      {
+        "score": 0.884384,
+        "label": "/technology & computing/artificial intelligence"
+      },
+      {
+        "score": 0.78999,
+        "label": "/news and politics/politics/war and conflicts"
+      },
+      {
+        "score": 0.773652,
+        "label": "/education"
+      },
+      {
+        "score": 0.76335,
+        "label": "/education/language learning"
       }
     ]
   },
@@ -1044,12 +1144,16 @@
     },
     "categories": [
       {
-        "score": 0.872474,
-        "label": "/business and finance/industries/defense industry"
+        "score": 0.816507,
+        "label": "/technology & computing/computing/information and network security"
       },
       {
-        "score": 0.866448,
-        "label": "/technology & computing/computing/information and network security"
+        "score": 0.759311,
+        "label": "/technology & computing/computing/internet/cloud computing"
+      },
+      {
+        "score": 0.643766,
+        "label": "/technology & computing/computing/computer software and applications"
       }
     ]
   },
@@ -1062,12 +1166,20 @@
     },
     "categories": [
       {
-        "score": 0.860766,
-        "label": "/business and finance/industries/defense industry"
+        "score": 0.868099,
+        "label": "/technology & computing/computing/information and network security"
       },
       {
-        "score": 0.858574,
-        "label": "/technology & computing/computing/information and network security"
+        "score": 0.7246,
+        "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.695033,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.601511,
+        "label": "/technology & computing/computing/desktops"
       }
     ]
   },
@@ -1080,27 +1192,23 @@
     },
     "categories": [
       {
-        "score": 0.999272,
+        "score": 0.999681,
         "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.997726,
+        "score": 0.998965,
         "label": "/technology & computing/computing/computer software and applications/graphics software"
       },
       {
-        "score": 0.992975,
+        "score": 0.997305,
         "label": "/technology & computing/computing/computer software and applications/video software"
       },
       {
-        "score": 0.951536,
+        "score": 0.993582,
         "label": "/technology & computing/computing/information and network security"
       },
       {
-        "score": 0.946253,
-        "label": "/business and finance/industries/defense industry"
-      },
-      {
-        "score": 0.849564,
+        "score": 0.887955,
         "label": "/technology & computing/computing/computer software and applications/photo editing software"
       }
     ]
@@ -1114,12 +1222,28 @@
     },
     "categories": [
       {
-        "score": 0.996688,
-        "label": "/technology & computing"
+        "score": 0.720294,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
       },
       {
-        "score": 0.977633,
-        "label": "/technology & computing/computing"
+        "score": 0.590373,
+        "label": "/technology & computing/computing/programming languages"
+      },
+      {
+        "score": 0.569358,
+        "label": "/technology & computing/computing/desktops"
+      },
+      {
+        "score": 0.550919,
+        "label": "/education/educational assessment"
+      },
+      {
+        "score": 0.539444,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.538339,
+        "label": "/technology & computing/computing/computer software and applications/databases"
       }
     ]
   },
@@ -1132,7 +1256,7 @@
     },
     "categories": [
       {
-        "score": 0.999831,
+        "score": 0.999957,
         "label": "/technology & computing/computing/computer software and applications/operating systems"
       }
     ]
@@ -1146,8 +1270,8 @@
     },
     "categories": [
       {
-        "score": 0.930065,
-        "label": "/style & fashion/women's fashion/women's accessories/women's hats and scarves"
+        "score": 0.991324,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
       }
     ]
   },
@@ -1160,8 +1284,8 @@
     },
     "categories": [
       {
-        "score": 0.930562,
-        "label": "/style & fashion/women's fashion/women's accessories/women's hats and scarves"
+        "score": 0.999405,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
       }
     ]
   },
@@ -1174,7 +1298,7 @@
     },
     "categories": [
       {
-        "score": 0.996528,
+        "score": 0.998668,
         "label": "/technology & computing/computing/computer software and applications/operating systems"
       }
     ]
@@ -1188,8 +1312,16 @@
     },
     "categories": [
       {
-        "score": 0.998156,
+        "score": 0.965304,
         "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.826776,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.688783,
+        "label": "/technology & computing/computing/desktops"
       }
     ]
   },
@@ -1202,7 +1334,7 @@
     },
     "categories": [
       {
-        "score": 0.957028,
+        "score": 0.958983,
         "label": "/technology & computing/computing/internet/cloud computing"
       }
     ]
@@ -1216,7 +1348,7 @@
     },
     "categories": [
       {
-        "score": 0.989783,
+        "score": 0.994909,
         "label": "/technology & computing/computing/internet/cloud computing"
       }
     ]
@@ -1230,20 +1362,20 @@
     },
     "categories": [
       {
-        "score": 0.86612,
+        "score": 0.928834,
         "label": "/technology & computing/computing/programming languages"
       },
       {
-        "score": 0.757495,
+        "score": 0.772385,
         "label": "/technology & computing/computing/internet/web development"
       },
       {
-        "score": 0.734988,
-        "label": "/technology & computing/computing/internet/web hosting"
+        "score": 0.758091,
+        "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.675485,
-        "label": "/technology & computing/computing/computer software and applications"
+        "score": 0.75745,
+        "label": "/technology & computing/computing/internet/web hosting"
       }
     ]
   },
@@ -1256,12 +1388,12 @@
     },
     "categories": [
       {
-        "score": 0.999185,
-        "label": "/science/physics"
+        "score": 0.999961,
+        "label": "/technology & computing/computing"
       },
       {
-        "score": 0.998123,
-        "label": "/technology & computing/computing"
+        "score": 0.999735,
+        "label": "/science/physics"
       }
     ]
   },
@@ -1274,11 +1406,11 @@
     },
     "categories": [
       {
-        "score": 0.999968,
+        "score": 0.999984,
         "label": "/technology & computing/computing"
       },
       {
-        "score": 0.999749,
+        "score": 0.999638,
         "label": "/science/physics"
       }
     ]
@@ -1292,12 +1424,24 @@
     },
     "categories": [
       {
-        "score": 0.999925,
+        "score": 0.999416,
+        "label": "/technology & computing/computing"
+      },
+      {
+        "score": 0.999341,
         "label": "/science/physics"
       },
       {
-        "score": 0.99976,
-        "label": "/technology & computing/computing"
+        "score": 0.981285,
+        "label": "/education"
+      },
+      {
+        "score": 0.947731,
+        "label": "/education/language learning"
+      },
+      {
+        "score": 0.941585,
+        "label": "/technology & computing/artificial intelligence"
       }
     ]
   }
