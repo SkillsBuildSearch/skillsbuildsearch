@@ -83,9 +83,9 @@ export default {
         this.loadCategories();
       }
 
-      let uri = `http://localhost:5001/api/v1/search?text=${encodeURIComponent(
-        text
-      )}`;
+      let uri = `${
+        process.env.VUE_APP_SERVER_ADDRESS
+      }/api/v1/search?text=${encodeURIComponent(text)}`;
 
       if (offset) {
         uri += `&offset=${encodeURIComponent(offset)}`;
@@ -133,7 +133,7 @@ export default {
     },
     loadCategories() {
       const categoryRequest = new Request(
-        "http://localhost:5001/api/v1/categories/"
+        `${process.env.VUE_APP_SERVER_ADDRESS}/api/v1/categories/`
       );
 
       fetch(categoryRequest)
