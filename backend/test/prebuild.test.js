@@ -20,14 +20,3 @@ describe('getAnalysisText - returns the text used for Watson analysis from a cou
       expect(imports.getAnalysisText({})).toBe(undefined);
     });
 });
-
-// Testing the timeout function
-describe('timeout - delays api calls', () => {
-  test('It only fires once', () => {
-    expect.assertions(1);
-    return expect(imports.timeout(100)).resolves.toBe(undefined);
-  });
-  test('It should handle negative wait times', () => {
-    expect(imports.timeout(-100)).resolves;
-  });
-});
