@@ -1,5 +1,5 @@
 <template>
-  <div class="input-group mb-3">
+  <div class="input-group mb-3 w-100">
     <input
       type="search"
       class="form-control"

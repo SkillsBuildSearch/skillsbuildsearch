@@ -29,7 +29,10 @@ import ErrorAlert from "./components/ErrorAlert.vue";
             :loading="loading"
           />
         </div>
-        <div class="col-auto" v-if="Object.entries(categories).length > 0">
+        <div
+          class="col-12 col-md-3"
+          v-if="Object.entries(categories).length > 0"
+        >
           <h2>Course categories</h2>
           <div
             v-for="category in Object.entries(categories)"
