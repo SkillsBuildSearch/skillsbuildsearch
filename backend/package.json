@@ -1,7 +1,7 @@
 {
   "name": "skillsbuildsearch",
   "version": "1.0.0",
-  "description": "SkillsBuildSearch is a search tool using IBM Watson to provide users with accurate and relevant SkillsBuild courses, given a user's HE descriptions.",
+  "description": "SkillsBuildSearch is a search tool using IBM Watson to provide users with accurate and relevant SkillsBuild courses, given a user's HE course descriptions.",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",

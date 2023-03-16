@@ -9,7 +9,6 @@ module.exports = {
   timeout,
   getAnalysisText,
   processResults,
-  processCourse,
   processDataset,
 };
 */

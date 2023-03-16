@@ -126,28 +126,16 @@
       "Title": "Getting Started with Threat Intelligence and Hunting",
       "Description_short": "This is a foundational course, exposing the learner to threat intelligence concepts including: Attack trends by geography, threat intelligence tools and real-world use cases. Complete this course to get your badge.",
       "Link": "https://www.ibm.com/academic/topic/capstone?ach_id=3f13c64c-c7ca-45d8-bce1-f05711460f09",
-      "Topic": "Capstone"
+      "Topic": "Capstone, IBM Security"
     },
     "categories": [
       {
-        "score": 0.705334,
-        "label": "/news and politics/politics/war and conflicts"
+        "score": 0.93995,
+        "label": "/technology & computing/computing/information and network security"
       },
       {
-        "score": 0.70265,
-        "label": "/technology & computing/artificial intelligence"
-      },
-      {
-        "score": 0.591031,
-        "label": "/pets/birds"
-      },
-      {
-        "score": 0.545473,
-        "label": "/pets/dogs"
-      },
-      {
-        "score": 0.522375,
-        "label": "/education/adult education"
+        "score": 0.926523,
+        "label": "/technology & computing/computing/internet/cloud computing"
       }
     ]
   },
@@ -156,88 +144,36 @@
       "Title": "Getting Started with Cloud for the Enterprise",
       "Description_short": "This course covers the basic foundations of cloud for the enterprise including: Consumer applications, Enterprise adoption, Delivery models and Industry Cloud Adoption.",
       "Link": "https://www.ibm.com/academic/topic/capstone?ach_id=b9de26db-b689-4894-bcad-5aa28deec936",
-      "Topic": "Capstone"
+      "Topic": "Capstone, IBM Cloud"
     },
     "categories": [
       {
-        "score": 0.605727,
+        "score": 0.790104,
         "label": "/technology & computing/computing/computer software and applications"
       },
       {
-        "score": 0.600364,
-        "label": "/business and finance/business/business administration"
-      },
-      {
-        "score": 0.599462,
-        "label": "/business and finance/business/government business"
-      },
-      {
-        "score": 0.597796,
-        "label": "/technology & computing/computing/programming languages"
-      },
-      {
-        "score": 0.590531,
-        "label": "/business and finance/business/business i.t."
-      },
-      {
-        "score": 0.565177,
-        "label": "/business and finance/business/large business"
-      },
-      {
-        "score": 0.552388,
-        "label": "/travel/travel type/business travel"
-      },
-      {
-        "score": 0.537327,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.535101,
+        "score": 0.70049,
         "label": "/technology & computing/computing/computer software and applications/operating systems"
       },
       {
-        "score": 0.521377,
-        "label": "/business and finance/business/small and medium-sized business"
+        "score": 0.657855,
+        "label": "/technology & computing/computing/desktops"
       },
       {
-        "score": 0.521151,
-        "label": "/business and finance/business/business utilities"
+        "score": 0.633952,
+        "label": "/technology & computing/computing/data storage and warehousing"
       },
       {
-        "score": 0.510858,
+        "score": 0.625789,
         "label": "/technology & computing/computing/computer software and applications/graphics software"
       },
       {
-        "score": 0.506356,
+        "score": 0.561368,
+        "label": "/technology & computing/computing/computer peripherals"
+      },
+      {
+        "score": 0.556655,
         "label": "/technology & computing/computing/computer software and applications/video software"
-      },
-      {
-        "score": 0.501721,
-        "label": "/video gaming/mobile games"
-      },
-      {
-        "score": 0.49834,
-        "label": "/careers/career planning"
-      },
-      {
-        "score": 0.496142,
-        "label": "/business and finance/industries"
-      },
-      {
-        "score": 0.480855,
-        "label": "/science/environment"
-      },
-      {
-        "score": 0.48054,
-        "label": "/education"
-      },
-      {
-        "score": 0.476708,
-        "label": "/education/online education"
-      },
-      {
-        "score": 0.473567,
-        "label": "/technology & computing/consumer electronics"
       }
     ]
   },
@@ -655,64 +591,6 @@
   },
   {
     "input": {
-      "Title": "Overview of Process Mining",
-      "Description_short": "This course introduces students to IBM Process Mining. Students will learn the differences between process mining and task mining, the different phases of process mining, use cases, and how process mining is performed. Students will also learn how to use IBM Process Mining to import data sources, map data, and how to visualize a process, along with the introduction to other major features of process mining.",
-      "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=d4536c1f-3c0c-4350-b675-0b7f29820ae0",
-      "Topic": "IBM Automation"
-    },
-    "categories": [
-      {
-        "score": 0.823052,
-        "label": "/technology & computing/computing/computer software and applications"
-      },
-      {
-        "score": 0.728522,
-        "label": "/technology & computing/computing/computer software and applications/operating systems"
-      },
-      {
-        "score": 0.638749,
-        "label": "/technology & computing/computing/computer software and applications/graphics software"
-      },
-      {
-        "score": 0.623589,
-        "label": "/business and finance/industries"
-      },
-      {
-        "score": 0.603785,
-        "label": "/business and finance/industries/technology industry"
-      },
-      {
-        "score": 0.588544,
-        "label": "/technology & computing/computing/desktops"
-      },
-      {
-        "score": 0.58743,
-        "label": "/technology & computing/computing/data storage and warehousing"
-      },
-      {
-        "score": 0.58653,
-        "label": "/business and finance/industries/manufacturing industry"
-      },
-      {
-        "score": 0.581686,
-        "label": "/technology & computing/artificial intelligence"
-      },
-      {
-        "score": 0.577597,
-        "label": "/technology & computing/consumer electronics/home entertainment systems"
-      },
-      {
-        "score": 0.570534,
-        "label": "/technology & computing/computing/programming languages"
-      },
-      {
-        "score": 0.567554,
-        "label": "/technology & computing/computing/computer software and applications/video software"
-      }
-    ]
-  },
-  {
-    "input": {
       "Title": "IBM Robotic Process Automation - Basic II",
       "Description_short": "RPA Basic II is a continuation of the Basic I course, where students will further their RPA skills and learn more in-depth and essential concepts for the development of the programmer within IBM RPA resources. This course covers the use of assets, parameters, and the manipulation of PDFs, data tables, and databases",
       "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=ca833692-6a84-4db4-828e-44f38b7e432a",
@@ -770,6 +648,64 @@
       {
         "score": 0.508577,
         "label": "/business and finance/business/business administration"
+      }
+    ]
+  },
+  {
+    "input": {
+      "Title": "Overview of Process Mining",
+      "Description_short": "This course introduces students to IBM Process Mining. Students will learn the differences between process mining and task mining, the different phases of process mining, use cases, and how process mining is performed. Students will also learn how to use IBM Process Mining to import data sources, map data, and how to visualize a process, along with the introduction to other major features of process mining.",
+      "Link": "https://www.ibm.com/academic/topic/ibm-automation?ach_id=d4536c1f-3c0c-4350-b675-0b7f29820ae0",
+      "Topic": "IBM Automation"
+    },
+    "categories": [
+      {
+        "score": 0.823052,
+        "label": "/technology & computing/computing/computer software and applications"
+      },
+      {
+        "score": 0.728522,
+        "label": "/technology & computing/computing/computer software and applications/operating systems"
+      },
+      {
+        "score": 0.638749,
+        "label": "/technology & computing/computing/computer software and applications/graphics software"
+      },
+      {
+        "score": 0.623589,
+        "label": "/business and finance/industries"
+      },
+      {
+        "score": 0.603785,
+        "label": "/business and finance/industries/technology industry"
+      },
+      {
+        "score": 0.588544,
+        "label": "/technology & computing/computing/desktops"
+      },
+      {
+        "score": 0.58743,
+        "label": "/technology & computing/computing/data storage and warehousing"
+      },
+      {
+        "score": 0.58653,
+        "label": "/business and finance/industries/manufacturing industry"
+      },
+      {
+        "score": 0.581686,
+        "label": "/technology & computing/artificial intelligence"
+      },
+      {
+        "score": 0.577597,
+        "label": "/technology & computing/consumer electronics/home entertainment systems"
+      },
+      {
+        "score": 0.570534,
+        "label": "/technology & computing/computing/programming languages"
+      },
+      {
+        "score": 0.567554,
+        "label": "/technology & computing/computing/computer software and applications/video software"
       }
     ]
   },

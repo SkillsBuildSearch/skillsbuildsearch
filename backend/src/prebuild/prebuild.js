@@ -2,7 +2,7 @@ const fs = require('fs');
 const NLU = require('ibm-watson/natural-language-understanding/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
-require('dotenv').config();
+require('dotenv').config({ path: 'watson.env' });
 
 // Course dataset containing only courses with Title, Description_short, Link, Topic
 
@@ -19,17 +19,6 @@ const nlu = new NLU({
 });
 
 /**
- * A helper function used to reduce the number of requests / second sent to IBM Watson
- * If this function wasn't used, IBM watson would return a 'Too Many Requests' error
- * @function  timeout
- * @param     {*} ms    the number of milliseconds to timeout for
- * @returns   {Promise} a call to setTimeout, to be awaited
- */
-function timeout(ms) {
-  return new Promise((resolve) => { setTimeout(resolve, ms); });
-}
-
-/**
  * Generates some text based of a course's information which is given to IBM watson's NLU
  * @function  getAnalysisText
  * @param     {Object.<String, String>}  course
@@ -38,8 +27,9 @@ function timeout(ms) {
  *  A piece of text generated from the course object, representing the course
  */
 function getAnalysisText(course) {
-  // return `${course.Title} ${course.Topic} ${course.Description_short}`;
-  return `${course.Description_short}`; // this prompt seems to produce the most accurate IBM watson categories
+  // this prompt seems to produce the most accurate IBM watson categories
+  return `${course.Title} ${course.Topic}`;
+  // return `${course.Description_short}`;
 }
 
 /**
@@ -52,6 +42,10 @@ function getAnalysisText(course) {
  *    the results object returned by IBM watson's `nlu.analyze`
  */
 function processResults(course, result) {
+  if (result.status !== 200) {
+    console.error(`ERROR ${result}`);
+    process.exit(1);
+  }
   course.Topic
     .split(',')
     .map((topic) => checkboxCats.add(topic.trim()));
@@ -71,46 +65,6 @@ function processResults(course, result) {
 }
 
 /**
- * Processes a single course from the dataset, passing it to IBM watson for
- *   Natural Language Understanding analysis, with the results being processes
- *   and saved to disk
- * @function  processCourse
- * @param     {*} course
- *    A course object from the dataset
- * @param     {*} idx
- *    the idx of the course in the dataset, used for timeout
- */
-async function processCourse(course, idx) {
-  await timeout(idx * 350);
-  try {
-    const result = await nlu.analyze({
-      text: getAnalysisText(course),
-      features: {
-        categories: {
-          limit: 20,
-        },
-      },
-    });
-    /* eslint-disable no-console */
-    if (result.status !== 200) {
-      console.error(`ERROR ${result}`);
-      process.exit(1);
-    }
-
-    console.log(`Processing ${course.Title}`);
-    processResults(course, result);
-  } catch (error) {
-    if (error.headers) { // IBM watson error, possible API key issue
-      const body = JSON.parse(error.body);
-      console.error(`ERROR ${error.message}\n${body.errorCode}: ${body.errorMessage}`);
-    } else { // possible API url issue
-      console.error(`ERROR ${error}`);
-    }
-    process.exit(1);
-  } /* eslint-enable no-console */
-}
-
-/**
  * Processes the entire dataset by calling the `processCourse` function for each course
  * The results stored in `checkboxCats`, `embeddingCats`, and `datasetWithCats`
  *   are written to disk.
@@ -122,22 +76,35 @@ async function processCourse(course, idx) {
  */
 async function processDataset(path, dst) {
   const dataset = JSON.parse(fs.readFileSync(path, 'utf8'));
-  Promise.all(dataset
-    .map(processCourse)) // process each course from the dataset
-    .then(() => {
-      // write compiled data to disk
-      fs.writeFileSync(`${dst}/checkbox_categories.json`, JSON.stringify([...checkboxCats].sort(), null, 2));
-      fs.writeFileSync(`${dst}/embedding_categories.json`, JSON.stringify([...embeddingCats].sort(), null, 2));
-      fs.writeFileSync(`${dst}/dataset_with_categories.json`, JSON.stringify(datasetWithCats, null, 2));
-      /* eslint-disable-next-line no-console */
-      console.log('Data saved to disk.');
-    });
+  /* eslint-disable no-restricted-syntax */
+  /* eslint-disable no-await-in-loop */
+  for (const course of dataset) {
+    try {
+      const result = await nlu.analyze({
+        text: getAnalysisText(course),
+        features: {
+          categories: {
+            limit: 20,
+          },
+        },
+      });
+      console.log(`Processing ${course.Title}`);
+      processResults(course, result);
+    } catch (err) {
+      console.error(`ERROR ${err}`);
+      process.exit(1);
+    }
+  }
+
+  // after all courses have been processed, saved new datasets to disk
+  fs.writeFileSync(`${dst}/checkbox_categories.json`, JSON.stringify([...checkboxCats].sort(), null, 2));
+  fs.writeFileSync(`${dst}/embedding_categories.json`, JSON.stringify([...embeddingCats].sort(), null, 2));
+  fs.writeFileSync(`${dst}/dataset_with_categories.json`, JSON.stringify(datasetWithCats, null, 2));
+  console.log('Data saved to disk.');
 }
 
 module.exports = {
-  timeout,
   getAnalysisText,
   processResults,
-  processCourse,
   processDataset,
 };
