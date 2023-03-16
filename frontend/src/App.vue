@@ -78,6 +78,8 @@ export default {
   },
   methods: {
     loadResults(text, offset, append) {
+      // Load search results from API.
+
       this.loading = true;
       this.clearErrors();
 
@@ -134,6 +136,8 @@ export default {
         });
     },
     loadCategories() {
+      // Load course categories from API. This runs on page load.
+
       const categoryRequest = new Request(
         `${import.meta.env.VITE_APP_SERVER_ADDRESS}/api/v1/categories/`
       );
@@ -159,6 +163,8 @@ export default {
         });
     },
     generateError(message, code) {
+      // Display an error message using the ErrorMessage component.
+
       if (this.errorMessages.length >= 3) {
         this.errorMessages.shift();
       }
