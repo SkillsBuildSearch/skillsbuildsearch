@@ -29,7 +29,10 @@ import ErrorAlert from "./components/ErrorAlert.vue";
             :loading="loading"
           />
         </div>
-        <div class="col-auto" v-if="Object.entries(categories).length > 0">
+        <div
+          class="col-12 col-md-3"
+          v-if="Object.entries(categories).length > 0"
+        >
           <h2>Course categories</h2>
           <div
             v-for="category in Object.entries(categories)"
@@ -82,10 +85,9 @@ export default {
       if (Object.entries(this.categories).length == 0) {
         this.loadCategories();
       }
-
-      let uri = `http://localhost:5001/api/v1/search?text=${encodeURIComponent(
-        text
-      )}`;
+      let uri = `${
+        import.meta.env.VITE_APP_SERVER_ADDRESS
+      }/api/v1/search?text=${encodeURIComponent(text)}`;
 
       if (offset) {
         uri += `&offset=${encodeURIComponent(offset)}`;
@@ -133,7 +135,7 @@ export default {
     },
     loadCategories() {
       const categoryRequest = new Request(
-        "http://localhost:5001/api/v1/categories/"
+        `${import.meta.env.VITE_APP_SERVER_ADDRESS}/api/v1/categories/`
       );
 
       fetch(categoryRequest)

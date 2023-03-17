@@ -1,5 +1,5 @@
 <template>
-  <div class="input-group mb-3">
+  <div class="input-group mb-3 w-100">
     <input
       type="search"
       class="form-control"
@@ -9,11 +9,13 @@
       @keyup.enter.prevent="submit"
       maxlength="1000"
       v-model="searchText"
+      ref="searchInput"
     />
     <button
       @click="toggleRecord()"
       class="btn btn-outline btn-outline-secondary"
       type="button"
+      ref="voiceButton"
     >
       <i
         class="bi"
@@ -45,7 +47,7 @@ export default {
       isRecording: false,
     };
   },
-  emits: ["voice", "search", "error"],
+  emits: ["search", "error"],
   methods: {
     submit() {
       if (this.searchText.length > 12) {
@@ -90,7 +92,10 @@ export default {
           method: "POST",
           body: formData,
         };
-        fetch("http://localhost:5001/api/v1/stt", postRequest)
+        fetch(
+          `${import.meta.env.VITE_APP_SERVER_ADDRESS}/api/v1/stt`,
+          postRequest
+        )
           .then((response) => {
             response.json().then((data) => {
               this.searchText = data.transcript;
