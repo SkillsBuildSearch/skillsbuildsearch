@@ -58,6 +58,7 @@ export default {
       );
     },
     signUp() {
+      // Redirects user to sign up to SkillsBuild and closes the modal.
       this.close();
       window.location.assign("https://skillsbuild.org");
     },

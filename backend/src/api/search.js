@@ -112,9 +112,9 @@ function getEmbeddings(cats) {
  * Compares the categories between the user and a course, producing a Mean Squared Error value
  * - MSE(𝚨, 𝚩) = 1/n * 𝛴 (𝚨_i - 𝚩_i)²
  * @function  MSE
- * @param     {Array.<Object>}  userEmbs
- *    An embedding object created from the categories produced by IBM Watson's NLU
- * @param     {Array.<Object>}  courseEmbs
+ * @param     {Object.<String, number>}  userEmbs
+ *    An embedding object created from the categories produced by IBM Watson's NLU 
+ * @param     {Object.<String, number>}  courseEmbs
  *    An embedding object created from the course's information produced by IBM Watson's NLU
  * @returns   {number}
  *    the MSE value computed from the embeddings of the categories

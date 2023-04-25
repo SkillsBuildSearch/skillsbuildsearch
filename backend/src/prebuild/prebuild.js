@@ -28,6 +28,7 @@ const nlu = new NLU({
  *  A piece of text generated from the course object, representing the course
  */
 function getAnalysisText(course) {
+  if (!course || Object.keys(course).length === 0) { return ''; }
   // this prompt seems to produce the most accurate IBM watson categories
   return `${course.Title} ${course.Topic}`;
   // return `${course.Title}\n${course.Description_short}`;

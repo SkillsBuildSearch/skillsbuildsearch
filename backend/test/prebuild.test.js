@@ -2,29 +2,25 @@ const fs = require('fs');
 const imports = require('../src/prebuild/prebuild');
 
 const dataset = JSON.parse(fs.readFileSync('data/dataset.json', 'utf8'));
-const embeddingCats = JSON.parse(fs.readFileSync('data/embedding_categories.json', 'utf8'));
 
-/*
-module.exports = {
-  getAnalysisText,
-  processResults,
-  processDataset,
-};
-*/
-
-describe('GetAnalysisText', () => {
-  test('Correct course object', () => {
-    /* eslint-disable max-len */
-    // expect(imports.getAnalysisText(dataset[0])).toBe(`${dataset[0].Title} ${dataset[0].Topic} ${dataset[0].Description_short}`);
-    expect(imports.getAnalysisText(dataset[0])).toBe(`${dataset[0].Description_short}`);
+// Testing the getAnalysisText function
+describe('getAnalysisText - returns the text used for Watson analysis from a course object', () => {
+  test('Correct course object 1', () => {
+    expect(imports.getAnalysisText(dataset[0])).toBe(`${dataset[0].Title} ${dataset[0].Topic}`);
   });
-  test('["5"] should result in [5]', () => {
-    expect(imports.parseOffset('5')).toBe(5);
+  test('Correct course object 2', () => {
+    expect(imports.getAnalysisText(dataset[1])).toBe(`${dataset[1].Title} ${dataset[1].Topic}`);
   });
-  test('["100"] should result in [100]', () => {
-    expect(imports.parseOffset('100')).toBe(100);
+  test('Correct course object 3', () => {
+    expect(imports.getAnalysisText(dataset[2])).toBe(`${dataset[2].Title} ${dataset[2].Topic}`);
   });
-  test('["0"] should result in [0]', () => {
-    expect(imports.parseOffset('0')).toBe(0);
+  test('Correct course object 4', () => {
+    expect(imports.getAnalysisText(dataset[3])).toBe(`${dataset[3].Title} ${dataset[3].Topic}`);
+  });
+  test('Empty object returns empty string', () => {
+    expect(imports.getAnalysisText({})).toBe('');
+  });
+  test('[undefined]', () => {
+    expect(imports.getAnalysisText(undefined)).toBe('');
   });
 });
