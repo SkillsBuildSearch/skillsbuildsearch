@@ -147,15 +147,16 @@ function embeddingSort(userCats, checkboxes) {
     .map((mseCourse) => mseCourse.course); // only return the course descriptions
 }
 
-function isValidUrl(urlStr) {
-  try {
-    /* eslint-disable-next-line no-new */
-    const url = new URL(urlStr);
-    return url.protocol === 'http:' || url.protocol === 'https:';
-  } catch (err) {
-    return false;
-  }
-}
+// possible future feature
+// function isValidUrl(urlStr) {
+//   try {
+//     /* eslint-disable-next-line no-new */
+//     const url = new URL(urlStr);
+//     return url.protocol === 'http:' || url.protocol === 'https:';
+//   } catch (err) {
+//     return false;
+//   }
+// }
 
 // NLU (Natural Language Understanding) object allows the program to interface with IBM watson
 const nlu = new NLU({
@@ -180,15 +181,11 @@ router.get('/search', async (req, res) => {
       },
     },
   };
-  if (isValidUrl(req.query.text)) {
-    params.url = req.query.text;
-  } else {
-    params.text = req.query.text;
 
-    // default language as en-gb if too little text, (to avoid language id error)
-    if (params.text.length < config.get('min_text_length')) {
-      params.language = 'en-gb';
-    }
+  params.text = req.query.text;
+  // default language as en-gb if too little text, (to avoid language id error)
+  if (params.text.length < config.get('min_text_length')) {
+    params.language = 'en-gb';
   }
 
   // the nlu function 'analyze' will make the call to IBM Watson's API
