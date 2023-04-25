@@ -1,0 +1,5 @@
+{
+    "default_length": 5,
+    "min_text_length": 10,
+    "decay_factor": 0.9
+}
