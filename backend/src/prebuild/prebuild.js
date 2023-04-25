@@ -1,8 +1,9 @@
 const fs = require('fs');
+const tqdm = require('tqdm');
 const NLU = require('ibm-watson/natural-language-understanding/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
-require('dotenv').config();
+require('dotenv').config({ path: 'watson.env' });
 
 // Course dataset containing only courses with Title, Description_short, Link, Topic
 
@@ -19,17 +20,6 @@ const nlu = new NLU({
 });
 
 /**
- * A helper function used to reduce the number of requests / second sent to IBM Watson
- * If this function wasn't used, IBM watson would return a 'Too Many Requests' error
- * @function  timeout
- * @param     {*} ms    the number of milliseconds to timeout for
- * @returns   {Promise} a call to setTimeout, to be awaited
- */
-function timeout(ms) {
-  return new Promise((resolve) => { setTimeout(resolve, ms); });
-}
-
-/**
  * Generates some text based of a course's information which is given to IBM watson's NLU
  * @function  getAnalysisText
  * @param     {Object.<String, String>}  course
@@ -38,8 +28,10 @@ function timeout(ms) {
  *  A piece of text generated from the course object, representing the course
  */
 function getAnalysisText(course) {
-  // return `${course.Title} ${course.Topic} ${course.Description_short}`;
-  return `${course.Description_short}`; // this prompt seems to produce the most accurate IBM watson categories
+  if (!course || Object.keys(course).length === 0) { return ''; }
+  // this prompt seems to produce the most accurate IBM watson categories
+  return `${course.Title} ${course.Topic}`;
+  // return `${course.Title}\n${course.Description_short}`;
 }
 
 /**
@@ -52,10 +44,17 @@ function getAnalysisText(course) {
  *    the results object returned by IBM watson's `nlu.analyze`
  */
 function processResults(course, result) {
+  if (result.status !== 200) {
+    console.error(`ERROR ${result}`);
+    process.exit(1);
+  }
+
+  // add topics to the checkboxCats set
   course.Topic
     .split(',')
     .map((topic) => checkboxCats.add(topic.trim()));
 
+  // add embedding categories to embeddingCats set
   result.result.categories.forEach((cat) => {
     cat.label
       .slice(1) // remove first / from the cats
@@ -64,6 +63,8 @@ function processResults(course, result) {
         embeddingCats.add(label);
       });
   });
+
+  // add course with IBM Watson categories to dataset_with_categories.json
   datasetWithCats.push({
     input: course,
     categories: result.result.categories,
@@ -71,73 +72,69 @@ function processResults(course, result) {
 }
 
 /**
- * Processes a single course from the dataset, passing it to IBM watson for
- *   Natural Language Understanding analysis, with the results being processes
- *   and saved to disk
- * @function  processCourse
- * @param     {*} course
- *    A course object from the dataset
- * @param     {*} idx
- *    the idx of the course in the dataset, used for timeout
+ * Performs the request to IBM Watson NLU via their SDK provided by the NPM package.
+ * The results of this NLU request is returned.
+ * @function analyseCourse
+ * @param    {Object} course
+ * @returns  {NLU.AnalysisResults}
  */
-async function processCourse(course, idx) {
-  await timeout(idx * 350);
-  try {
-    const result = await nlu.analyze({
-      text: getAnalysisText(course),
-      features: {
-        categories: {
-          limit: 20,
-        },
+async function analyseCourse(course) {
+  return nlu.analyze({
+    text: getAnalysisText(course),
+    features: {
+      categories: {
+        limit: 20,
       },
-    });
-    /* eslint-disable no-console */
-    if (result.status !== 200) {
-      console.error(`ERROR ${result}`);
-      process.exit(1);
-    }
-
-    console.log(`Processing ${course.Title}`);
-    processResults(course, result);
-  } catch (error) {
-    if (error.headers) { // IBM watson error, possible API key issue
-      const body = JSON.parse(error.body);
-      console.error(`ERROR ${error.message}\n${body.errorCode}: ${body.errorMessage}`);
-    } else { // possible API url issue
-      console.error(`ERROR ${error}`);
-    }
-    process.exit(1);
-  } /* eslint-enable no-console */
+    },
+  });
 }
 
 /**
- * Processes the entire dataset by calling the `processCourse` function for each course
+ * Writes the preprocessing results to disk.
+ * `checkboxCats` and `embeddingCats` are first sorted before being written.
+ * @function saveResults
+ * @param   {string}  dst
+ */
+function saveResults(dst) {
+  // after all courses have been processed, saved new datasets to disk
+  fs.writeFileSync(`${dst}/checkbox_categories.json`, JSON.stringify([...checkboxCats].sort(), null, 2));
+  fs.writeFileSync(`${dst}/embedding_categories.json`, JSON.stringify([...embeddingCats].sort(), null, 2));
+  fs.writeFileSync(`${dst}/dataset_with_categories.json`, JSON.stringify(datasetWithCats, null, 2));
+  console.log('Data saved to disk.');
+}
+
+/**
+ * Iterates throught the dataset, analysing each course and saving the results.
  * The results stored in `checkboxCats`, `embeddingCats`, and `datasetWithCats`
- *   are written to disk.
+ *   are then written to disk.
  * @function  processDataset
- * @param {*} path
- *    the path of the dataset file
- * @param {*} dst
- *    the directory for the processed data to be saved to
+ * @param {*} path  the path of the dataset file
+ * @param {*} dst   the directory for the processed data to be saved to
  */
 async function processDataset(path, dst) {
   const dataset = JSON.parse(fs.readFileSync(path, 'utf8'));
-  Promise.all(dataset
-    .map(processCourse)) // process each course from the dataset
-    .then(() => {
-      // write compiled data to disk
-      fs.writeFileSync(`${dst}/checkbox_categories.json`, JSON.stringify([...checkboxCats].sort(), null, 2));
-      fs.writeFileSync(`${dst}/embedding_categories.json`, JSON.stringify([...embeddingCats].sort(), null, 2));
-      fs.writeFileSync(`${dst}/dataset_with_categories.json`, JSON.stringify(datasetWithCats, null, 2));
-      /* eslint-disable-next-line no-console */
-      console.log('Data saved to disk.');
-    });
+
+  /* eslint-disable no-restricted-syntax */
+  /* eslint-disable no-await-in-loop */
+  // using tqdm to output a progress bar for which courses have been processed.
+  for (const course of tqdm(dataset)) {
+    try {
+      // analyse and process results
+      const result = await analyseCourse(course);
+      processResults(course, result);
+    } catch (err) {
+      // an error may be thrown by IBM Watson in `analyseCourse`
+      console.error(`ERROR processing course ${course.Title}\n${err}`);
+      process.exit(1); // stop program to fix error
+    }
+  }
+
+  // after dataset is processed, save results to disk
+  saveResults(dst);
 }
 
 module.exports = {
-  timeout,
   getAnalysisText,
   processResults,
-  processCourse,
   processDataset,
 };
