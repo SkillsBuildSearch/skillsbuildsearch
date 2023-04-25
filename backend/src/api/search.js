@@ -5,8 +5,8 @@ const NLU = require('ibm-watson/natural-language-understanding/v1');
 const STT = require('ibm-watson/speech-to-text/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
-require('dotenv').config();
 const config = require('config');
+require('dotenv').config({ path: 'watson.env' });
 
 // loading the dataset & additional data from disk
 const dataset = JSON.parse(fs.readFileSync('data/dataset_with_categories.json', 'utf8'));
@@ -28,7 +28,9 @@ function parseOffset(query) {
 }
 
 /**
- * Converts and validates the checkbox bits sent from the frontend, into a object
+ * Converts and validates the checkbox bits sent from the frontend, into a object.
+ * The number sent through the query, as binary, represents which checkboxes are selected.
+ * 0 - not selected, 1 - selected
  * @function  parseCheckboxes
  * @param     {*}     query   Any argument
  * @returns   {Object.<string, number>}
@@ -41,7 +43,6 @@ function parseCheckboxes(query) {
 
   // ignore if bits is undefined, leq 0, or gt max possible valid integer
   //  (given number of checkbox categories)
-  /* eslint-disable-next-line no-bitwise */
   if (!bits || bits <= 0 || bits >= (1 << checkboxCats.length) - 1) {
     return { ignore: true };
   }
@@ -49,8 +50,7 @@ function parseCheckboxes(query) {
   // cannot ignore since non of the above conditions were met, user has selected checkboxes
   const checkboxes = { ignore: false };
   checkboxCats.forEach((check, idx) => {
-    /* eslint-disable-next-line no-bitwise */
-    checkboxes[check] = bits & (1 << idx);
+    checkboxes[check] = bits & (1 << idx); // returns the bit ${idx}
   });
 
   return checkboxes;
@@ -98,19 +98,11 @@ function getEmbeddings(cats) {
 
   // then populate embedding object with max scores from the IBM watson categories
   cats.forEach((cat) => {
-    const parts = cat.label
+    cat.label
       .slice(1) // remove first / from the cats
-      .split('/');
-
-    parts
-      .forEach((label, index) => {
-        /* use the maximum confidence score for each embedding label
-           however, the score has more ephasis on the higher level labels.
-        */
-        embeddings[label] = Math.max(
-          embeddings[label],
-          cat.score * config.get('decay_factor') ** (parts.length - index - 1),
-        );
+      .split('/')
+      .forEach((label) => {
+        embeddings[label] = Math.max(embeddings[label], cat.score);
       });
   });
   return embeddings;
@@ -120,9 +112,9 @@ function getEmbeddings(cats) {
  * Compares the categories between the user and a course, producing a Mean Squared Error value
  * - MSE(𝚨, 𝚩) = 1/n * 𝛴 (𝚨_i - 𝚩_i)²
  * @function  MSE
- * @param     {Array.<Object>}  userEmbs
- *    An embedding object created from the categories produced by IBM Watson's NLU
- * @param     {Array.<Object>}  courseEmbs
+ * @param     {Object.<String, number>}  userEmbs
+ *    An embedding object created from the categories produced by IBM Watson's NLU 
+ * @param     {Object.<String, number>}  courseEmbs
  *    An embedding object created from the course's information produced by IBM Watson's NLU
  * @returns   {number}
  *    the MSE value computed from the embeddings of the categories
@@ -155,6 +147,17 @@ function embeddingSort(userCats, checkboxes) {
     .map((mseCourse) => mseCourse.course); // only return the course descriptions
 }
 
+// possible future feature
+// function isValidUrl(urlStr) {
+//   try {
+//     /* eslint-disable-next-line no-new */
+//     const url = new URL(urlStr);
+//     return url.protocol === 'http:' || url.protocol === 'https:';
+//   } catch (err) {
+//     return false;
+//   }
+// }
+
 // NLU (Natural Language Understanding) object allows the program to interface with IBM watson
 const nlu = new NLU({
   version: '2022-04-07',
@@ -172,13 +175,14 @@ router.get('/search', async (req, res) => {
   }
   // parameters sent to IBM Watson's NLU service
   const params = {
-    text: req.query.text,
     features: {
       categories: {
         limit: 20,
       },
     },
   };
+
+  params.text = req.query.text;
   // default language as en-gb if too little text, (to avoid language id error)
   if (params.text.length < config.get('min_text_length')) {
     params.language = 'en-gb';
@@ -203,16 +207,15 @@ router.get('/search', async (req, res) => {
 
     res.status(200).json(searchResults);
   }).catch((error) => {
-    /* eslint-disable-next-line no-console */
     console.error(`ERROR ${error}`);
     const errbody = JSON.parse(error.body);
     errbody.code = 2;
-    res.status(400).json(errbody); // TODO: proper error handling
+    res.status(400).json(errbody);
   });
 });
 
 // endpoint for the frontend to get the topic categories from the dataset
-router.get('/categories', async (req, res) => {
+router.get('/categories', async (_, res) => {
   res.status(200).json(checkboxCats);
 });
 
@@ -229,6 +232,10 @@ const stt = new STT({
 */
 const upload = multer({ storage: multer.memoryStorage() });
 router.post('/stt', upload.single('audio'), async (req, res) => {
+  if (!req.file || !req.file.buffer) {
+    res.status(400).json({ error: 'An error occured! Invalid audio data', code: 1 });
+  }
+
   // stt.recognize performs a call to a STT model in IBM cloud
   stt.recognize({
     audio: req.file.buffer, // contains the audio data transmitted
@@ -241,9 +248,7 @@ router.post('/stt', upload.single('audio'), async (req, res) => {
     }
 
     const finalText = result.result.results.filter((text) => text.final);
-    if (!finalText.length) {
-      res.status(400).json({ error: 'An error occured! Cannot transcribe speech', code: 1 });
-    } else if (!finalText[0].alternatives.length) {
+    if (!finalText.length || !finalText[0].alternatives.length) {
       res.status(400).json({ error: 'An error occured! Cannot transcribe speech', code: 1 });
     }
 

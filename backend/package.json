@@ -1,7 +1,7 @@
 {
   "name": "skillsbuildsearch",
   "version": "1.0.0",
-  "description": "SkillsBuildSearch is a search tool using IBM Watson to provide users with accurate and relevant SkillsBuild courses, given a user's HE descriptions.",
+  "description": "SkillsBuildSearch is a search tool using IBM Watson to provide users with accurate and relevant SkillsBuild courses, given a user's HE course descriptions.",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -12,12 +12,24 @@
   },
   "keywords": [],
   "contributors": [
-    {"name": "Samuel Barnett"},
-    {"name": "William Gould"},
-    {"name": "Sang M Lee"},
-    {"name": "Andrew Oliver"},
-    {"name": "Theo Osborn"},
-    {"name": "Toby T Watkinson"}
+    {
+      "name": "Samuel Barnett"
+    },
+    {
+      "name": "William Gould"
+    },
+    {
+      "name": "Sang M Lee"
+    },
+    {
+      "name": "Andrew Oliver"
+    },
+    {
+      "name": "Theo Osborn"
+    },
+    {
+      "name": "Toby T Watkinson"
+    }
   ],
   "repository": {
     "type": "git",
@@ -32,7 +44,8 @@
     "helmet": "^5.1.1",
     "ibm-watson": "^7.1.2",
     "morgan": "^1.10.0",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "tqdm": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "^8.22.0",

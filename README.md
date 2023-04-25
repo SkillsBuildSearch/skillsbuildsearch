@@ -2,9 +2,9 @@
 
 Using Node LTS 18.14.2
 
-## How to run frontend development version
+## How to run SkillsBuildSearch
 
-1. First, ensure NPM and Node are updated on your computer to the latest LTS versions.
+1. First, ensure Node and NPM are updated on your computer to the latest LTS versions.
 2. Navigate to the `frontend` folder using the terminal.
 3. Run `npm install`.
 4. After this has completed, run `npm run dev` to launch the Vite development server. When deploying to production, run `npm run build` - this will create a `dist` folder with the bundled and minified javascript.

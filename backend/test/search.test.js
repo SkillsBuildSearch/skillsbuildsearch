@@ -14,16 +14,16 @@ const testCourses = tests.exampleCourses;
 // testing the MSE function
 describe('MSE - takes 2 embedding objects and returns the Mean Squared Error', () => {
   test('Sample Embeddings (1, 2)', () => {
-    expect(imports.MSE(testEmbs[0], testEmbs[1])).toBe(0.06397282521709004);
+    expect(imports.MSE(testEmbs[0], testEmbs[1])).toBe(0.07919805826747299);
   });
   test('Sample Embeddings (2, 1) [Same as (1, 2)]', () => {
     expect(imports.MSE(testEmbs[1], testEmbs[0])).toBe(imports.MSE(testEmbs[0], testEmbs[1]));
   });
   test('Sample Embeddings (3, 4)', () => {
-    expect(imports.MSE(testEmbs[2], testEmbs[3])).toBe(0.06648243939758591);
+    expect(imports.MSE(testEmbs[2], testEmbs[3])).toBe(0.08364127324262162);
   });
   test('Sample Embeddings (4, 5)', () => {
-    expect(imports.MSE(testEmbs[3], testEmbs[4])).toBe(0.04269465099829647);
+    expect(imports.MSE(testEmbs[3], testEmbs[4])).toBe(0.053844795791729724);
   });
   test('Same Embeddings, should result in [0]', () => {
     expect(imports.MSE(testEmbs[0], testEmbs[0])).toBe(0);
