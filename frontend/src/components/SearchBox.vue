@@ -1,5 +1,5 @@
 <template>
-  <div class="input-group mb-3">
+  <div class="input-group mb-3 w-100">
     <input
       type="search"
       class="form-control"
@@ -50,6 +50,7 @@ export default {
   emits: ["search", "error"],
   methods: {
     submit() {
+      // Emits search text to parent component.
       if (this.searchText.length > 12) {
         this.$emit("search", this.searchText);
       } else {
@@ -74,6 +75,8 @@ export default {
         });
     },
     setUpRecorder(stream) {
+      // Create event listeners for audio recorder. These should post the audio to the API when recording has finished.
+
       this.isRecording = true;
       const options = { contentType: "audio/webm" };
       const recordedChunks = [];
@@ -92,7 +95,10 @@ export default {
           method: "POST",
           body: formData,
         };
-        fetch("http://localhost:5001/api/v1/stt", postRequest)
+        fetch(
+          `${import.meta.env.VITE_APP_SERVER_ADDRESS}/api/v1/stt`,
+          postRequest
+        )
           .then((response) => {
             response.json().then((data) => {
               this.searchText = data.transcript;
