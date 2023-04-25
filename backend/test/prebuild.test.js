@@ -6,7 +6,6 @@ const embeddingCats = JSON.parse(fs.readFileSync('data/embedding_categories.json
 
 /*
 module.exports = {
-  timeout,
   getAnalysisText,
   processResults,
   processDataset,

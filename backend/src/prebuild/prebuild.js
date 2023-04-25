@@ -1,4 +1,5 @@
 const fs = require('fs');
+const tqdm = require('tqdm');
 const NLU = require('ibm-watson/natural-language-understanding/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
@@ -29,7 +30,7 @@ const nlu = new NLU({
 function getAnalysisText(course) {
   // this prompt seems to produce the most accurate IBM watson categories
   return `${course.Title} ${course.Topic}`;
-  // return `${course.Description_short}`;
+  // return `${course.Title}\n${course.Description_short}`;
 }
 
 /**
@@ -46,10 +47,13 @@ function processResults(course, result) {
     console.error(`ERROR ${result}`);
     process.exit(1);
   }
+
+  // add topics to the checkboxCats set
   course.Topic
     .split(',')
     .map((topic) => checkboxCats.add(topic.trim()));
 
+  // add embedding categories to embeddingCats set
   result.result.categories.forEach((cat) => {
     cat.label
       .slice(1) // remove first / from the cats
@@ -58,6 +62,8 @@ function processResults(course, result) {
         embeddingCats.add(label);
       });
   });
+
+  // add course with IBM Watson categories to dataset_with_categories.json
   datasetWithCats.push({
     input: course,
     categories: result.result.categories,
@@ -65,42 +71,65 @@ function processResults(course, result) {
 }
 
 /**
- * Processes the entire dataset by calling the `processCourse` function for each course
- * The results stored in `checkboxCats`, `embeddingCats`, and `datasetWithCats`
- *   are written to disk.
- * @function  processDataset
- * @param {*} path
- *    the path of the dataset file
- * @param {*} dst
- *    the directory for the processed data to be saved to
+ * Performs the request to IBM Watson NLU via their SDK provided by the NPM package.
+ * The results of this NLU request is returned.
+ * @function analyseCourse
+ * @param    {Object} course
+ * @returns  {NLU.AnalysisResults}
  */
-async function processDataset(path, dst) {
-  const dataset = JSON.parse(fs.readFileSync(path, 'utf8'));
-  /* eslint-disable no-restricted-syntax */
-  /* eslint-disable no-await-in-loop */
-  for (const course of dataset) {
-    try {
-      const result = await nlu.analyze({
-        text: getAnalysisText(course),
-        features: {
-          categories: {
-            limit: 20,
-          },
-        },
-      });
-      console.log(`Processing ${course.Title}`);
-      processResults(course, result);
-    } catch (err) {
-      console.error(`ERROR ${err}`);
-      process.exit(1);
-    }
-  }
+async function analyseCourse(course) {
+  return nlu.analyze({
+    text: getAnalysisText(course),
+    features: {
+      categories: {
+        limit: 20,
+      },
+    },
+  });
+}
 
+/**
+ * Writes the preprocessing results to disk.
+ * `checkboxCats` and `embeddingCats` are first sorted before being written.
+ * @function saveResults
+ * @param   {string}  dst
+ */
+function saveResults(dst) {
   // after all courses have been processed, saved new datasets to disk
   fs.writeFileSync(`${dst}/checkbox_categories.json`, JSON.stringify([...checkboxCats].sort(), null, 2));
   fs.writeFileSync(`${dst}/embedding_categories.json`, JSON.stringify([...embeddingCats].sort(), null, 2));
   fs.writeFileSync(`${dst}/dataset_with_categories.json`, JSON.stringify(datasetWithCats, null, 2));
   console.log('Data saved to disk.');
+}
+
+/**
+ * Iterates throught the dataset, analysing each course and saving the results.
+ * The results stored in `checkboxCats`, `embeddingCats`, and `datasetWithCats`
+ *   are then written to disk.
+ * @function  processDataset
+ * @param {*} path  the path of the dataset file
+ * @param {*} dst   the directory for the processed data to be saved to
+ */
+async function processDataset(path, dst) {
+  const dataset = JSON.parse(fs.readFileSync(path, 'utf8'));
+
+  /* eslint-disable no-restricted-syntax */
+  /* eslint-disable no-await-in-loop */
+  // using tqdm to output a progress bar for which courses have been processed.
+  for (const course of tqdm(dataset)) {
+    try {
+      // analyse and process results
+      const result = await analyseCourse(course);
+      processResults(course, result);
+    } catch (err) {
+      // an error may be thrown by IBM Watson in `analyseCourse`
+      console.error(`ERROR processing course ${course.Title}\n${err}`);
+      process.exit(1); // stop program to fix error
+    }
+  }
+
+  // after dataset is processed, save results to disk
+  saveResults(dst);
 }
 
 module.exports = {

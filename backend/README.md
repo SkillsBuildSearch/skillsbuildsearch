@@ -1,11 +1,7 @@
-# Express API Starter
+# Backend
 
-How to use this template:
-
-```sh
-npx create-express-api --directory my-api-name
-```
-
+Contains all the source code used for the backend server, express API, search functionality, prebuild preprocessing, and testing. </br>
+Uses create-express-api as a template. </br>
 Includes API Server utilities:
 
 * [morgan](https://www.npmjs.com/package/morgan)

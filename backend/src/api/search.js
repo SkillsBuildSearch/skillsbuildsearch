@@ -5,8 +5,8 @@ const NLU = require('ibm-watson/natural-language-understanding/v1');
 const STT = require('ibm-watson/speech-to-text/v1');
 const { IamAuthenticator } = require('ibm-watson/auth');
 
-require('dotenv').config({ path: 'watson.env' });
 const config = require('config');
+require('dotenv').config({ path: 'watson.env' });
 
 // loading the dataset & additional data from disk
 const dataset = JSON.parse(fs.readFileSync('data/dataset_with_categories.json', 'utf8'));
@@ -28,7 +28,9 @@ function parseOffset(query) {
 }
 
 /**
- * Converts and validates the checkbox bits sent from the frontend, into a object
+ * Converts and validates the checkbox bits sent from the frontend, into a object.
+ * The number sent through the query, as binary, represents which checkboxes are selected.
+ * 0 - not selected, 1 - selected
  * @function  parseCheckboxes
  * @param     {*}     query   Any argument
  * @returns   {Object.<string, number>}
@@ -48,7 +50,7 @@ function parseCheckboxes(query) {
   // cannot ignore since non of the above conditions were met, user has selected checkboxes
   const checkboxes = { ignore: false };
   checkboxCats.forEach((check, idx) => {
-    checkboxes[check] = bits & (1 << idx);
+    checkboxes[check] = bits & (1 << idx); // returns the bit ${idx}
   });
 
   return checkboxes;
@@ -96,16 +98,11 @@ function getEmbeddings(cats) {
 
   // then populate embedding object with max scores from the IBM watson categories
   cats.forEach((cat) => {
-    const parts = cat.label
+    cat.label
       .slice(1) // remove first / from the cats
-      .split('/');
-
-    parts
+      .split('/')
       .forEach((label) => {
-        embeddings[label] = Math.max(
-          embeddings[label],
-          cat.score,
-        );
+        embeddings[label] = Math.max(embeddings[label], cat.score);
       });
   });
   return embeddings;
@@ -153,8 +150,8 @@ function embeddingSort(userCats, checkboxes) {
 function isValidUrl(urlStr) {
   try {
     /* eslint-disable-next-line no-new */
-    new URL(urlStr);
-    return true;
+    const url = new URL(urlStr);
+    return url.protocol === 'http:' || url.protocol === 'https:';
   } catch (err) {
     return false;
   }
@@ -221,7 +218,7 @@ router.get('/search', async (req, res) => {
 });
 
 // endpoint for the frontend to get the topic categories from the dataset
-router.get('/categories', async (req, res) => {
+router.get('/categories', async (_, res) => {
   res.status(200).json(checkboxCats);
 });
 
